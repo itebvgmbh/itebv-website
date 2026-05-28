@@ -1,0 +1,40 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-primary: #0056A4;
+  --color-primary-light: #1A6FBE;
+  --color-primary-dark: #003D75;
+  --color-accent: #E8F1FA;
+  --color-text: #1a1a1a;
+  --color-text-light: #555555;
+  --color-bg: #ffffff;
+  --color-bg-alt: #F5F8FC;
+  --color-border: #DDE4ED;
+
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.section-padding {
+  @apply py-20 md:py-28;
+}
+
+.container-narrow {
+  @apply mx-auto max-w-4xl px-6;
+}
+
+.container-wide {
+  @apply mx-auto max-w-6xl px-6;
+}

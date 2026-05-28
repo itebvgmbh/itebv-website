@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "ITEBV Website"
+version = "1.0.0"
+id = "artifacts/itebv-website"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25134
+
+[services.development]
+run = "pnpm --filter @workspace/itebv-website run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/itebv-website", "run", "build" ]
+publicDir = "artifacts/itebv-website/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25134"
+BASE_PATH = "/"
