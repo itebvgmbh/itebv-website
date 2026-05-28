@@ -54,6 +54,11 @@ router.post("/chat", async (req: Request, res: Response) => {
       messages: formattedMessages,
     });
 
+    stream.finalMessage().catch(() => {
+      // Already handled via 'error'/'end' events; swallow to avoid
+      // unhandled promise rejection when the client aborts.
+    });
+
     stream.on("text", (text: string) => {
       if (!closed) {
         res.write(`data: ${JSON.stringify({ text })}\n\n`);
