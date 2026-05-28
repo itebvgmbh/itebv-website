@@ -1,0 +1,32 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "liTQawVIA-KCT5jxBacn7"
+uri = "file://artifacts/itebv-website/public/images/hero-visual.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "LWUtpRzz4p01oGk8Fea-E"
+uri = "file://artifacts/itebv-website/public/images/service-analyse.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "3Amp3j8h8cUnR8NxJrFKn"
+uri = "file://artifacts/itebv-website/public/images/service-software.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "-aKOCepA1zUgGYDsnU_zS"
+uri = "file://artifacts/itebv-website/public/images/service-ki.png"
+type = "image"
+title = "generated_image"
+
+[[generated]]
+id = "tp5GlSyZiBj4bh3JMkMKf"
+uri = "file://artifacts/itebv-website/public/images/office-mood.png"
+type = "image"
+title = "generated_image"

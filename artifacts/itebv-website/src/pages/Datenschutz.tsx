@@ -1,15 +1,25 @@
+import { Link } from "wouter";
+import { ChevronRight } from "lucide-react";
+
 export default function DatenschutzPage() {
   return (
     <div>
-      <section className="section-padding bg-bg-alt">
-        <div className="container-narrow">
-          <h1 className="text-4xl md:text-5xl font-bold text-text leading-tight mb-12">
-            Datenschutz & Disclaimer
-          </h1>
+      <section className="bg-bg-alt border-b border-border">
+        <div className="container-narrow pt-12 md:pt-16 pb-10 md:pb-14">
+          <nav aria-label="Breadcrumb" className="text-sm text-text-light mb-6 flex items-center gap-1.5">
+            <Link href="/" className="hover:text-primary transition-colors">Start</Link>
+            <ChevronRight size={14} className="text-text-muted" />
+            <span className="text-text-strong">Datenschutz</span>
+          </nav>
+          <h1 className="heading-h1">Datenschutz &amp; Disclaimer</h1>
+        </div>
+      </section>
 
-          <div className="space-y-12 text-text-light">
+      <section className="section-padding bg-bg">
+        <div className="container-narrow">
+          <div className="space-y-12 text-text-light max-w-prose">
             <section>
-              <h2 className="text-2xl md:text-3xl font-bold text-text mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold text-text-strong mb-4">
                 Auskunfts- und Widerrufsrecht
               </h2>
               <p className="text-lg leading-relaxed">
@@ -23,7 +33,7 @@ export default function DatenschutzPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl md:text-3xl font-bold text-text mb-4">Datenschutz (allgemein)</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-text-strong mb-4">Datenschutz (allgemein)</h2>
               <div className="space-y-4 text-lg leading-relaxed">
                 <p>
                   Beim Zugriff auf unsere Webseite werden automatisch allgemeine
@@ -71,7 +81,7 @@ export default function DatenschutzPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl md:text-3xl font-bold text-text mb-4">KI-Chatbot</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-text-strong mb-4">KI-Chatbot</h2>
               <div className="space-y-4 text-lg leading-relaxed">
                 <p>
                   Diese Website nutzt einen KI-gestützten Chatbot zur Beantwortung
@@ -109,11 +119,10 @@ export default function DatenschutzPage() {
             </section>
 
             <section>
-              <h2 className="text-2xl md:text-3xl font-bold text-text mb-6">Haftungsausschluss (Disclaimer)</h2>
-
+              <h2 className="text-2xl md:text-3xl font-bold text-text-strong mb-6">Haftungsausschluss (Disclaimer)</h2>
               <div className="space-y-8">
                 <div>
-                  <h3 className="text-xl font-semibold text-text mb-3">1. Haftung für Inhalte</h3>
+                  <h3 className="text-xl font-semibold text-text-strong mb-3">1. Haftung für Inhalte</h3>
                   <p className="text-lg leading-relaxed">
                     Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene
                     Inhalte auf diesen Seiten nach den allgemeinen Gesetzen
@@ -122,18 +131,16 @@ export default function DatenschutzPage() {
                     gespeicherte fremde Informationen zu überwachen.
                   </p>
                 </div>
-
                 <div>
-                  <h3 className="text-xl font-semibold text-text mb-3">2. Haftung für Links</h3>
+                  <h3 className="text-xl font-semibold text-text-strong mb-3">2. Haftung für Links</h3>
                   <p className="text-lg leading-relaxed">
                     Diese Website enthält Links zu externen Webseiten Dritter, auf
                     deren Inhalte kein Einfluss genommen werden kann. Deshalb kann
                     für diese fremden Inhalte auch keine Gewähr übernommen werden.
                   </p>
                 </div>
-
                 <div>
-                  <h3 className="text-xl font-semibold text-text mb-3">3. Urheberrecht</h3>
+                  <h3 className="text-xl font-semibold text-text-strong mb-3">3. Urheberrecht</h3>
                   <p className="text-lg leading-relaxed">
                     Die durch die Diensteanbieter, deren Mitarbeiter und beauftragte
                     Dritte erstellten Inhalte und Werke auf diesen Seiten

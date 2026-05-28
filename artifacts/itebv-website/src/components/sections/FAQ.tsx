@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { getFaqJsonLd } from "@/lib/structured-data";
+import SectionHeader from "@/components/ui/SectionHeader";
+import Reveal from "@/components/ui/Reveal";
 
 export const faqItems = [
   { question: "Was kostet eine KI- oder IT-Beratung bei ITEBV?", answer: "Das Erstgespräch ist immer kostenlos und unverbindlich. Konkrete Beratungsprojekte rechne ich entweder nach Tagessatz, auf Festpreisbasis oder erfolgsorientiert ab – je nach Projekt. KI-Projekte starten typischerweise ab 5.000 €. Eine belastbare Einschätzung bekommen Sie nach dem Erstgespräch." },
@@ -17,23 +19,21 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="section-padding bg-bg">
+    <section id="faq" className="section-padding bg-bg-alt">
       <div className="container-narrow">
-        <h2 className="text-3xl md:text-4xl font-bold text-text mb-4 text-center">
-          Häufige Fragen
-        </h2>
-        <p className="text-text-light text-center max-w-2xl mx-auto mb-12">
-          Antworten auf die Fragen, die Unternehmer vor einem Beratungsprojekt
-          am häufigsten stellen.
-        </p>
+        <SectionHeader
+          eyebrow="FAQ"
+          title="Häufige Fragen"
+          lead="Antworten auf die Fragen, die Unternehmer vor einem Beratungsprojekt am häufigsten stellen."
+        />
 
-        <ul className="space-y-3">
+        <Reveal as="ul" className="space-y-3">
           {faqItems.map((item, index) => {
             const isOpen = openIndex === index;
             return (
               <li
                 key={item.question}
-                className="border border-border rounded-xl bg-white overflow-hidden"
+                className="card-base overflow-hidden"
               >
                 <button
                   type="button"
@@ -41,21 +41,29 @@ export default function FAQ() {
                   aria-expanded={isOpen}
                   className="w-full flex items-center justify-between gap-4 px-5 md:px-6 py-4 md:py-5 text-left hover:bg-bg-alt transition-colors"
                 >
-                  <span className="text-base md:text-lg font-semibold text-text">{item.question}</span>
+                  <span className="text-base md:text-lg font-semibold text-text-strong">
+                    {item.question}
+                  </span>
                   <ChevronDown
                     size={20}
-                    className={`shrink-0 text-primary transition-transform ${isOpen ? "rotate-180" : ""}`}
+                    className={`shrink-0 text-primary transition-transform duration-300 ${isOpen ? "rotate-180" : ""}`}
                   />
                 </button>
-                {isOpen && (
-                  <div className="px-5 md:px-6 pb-5 md:pb-6 -mt-1 text-text-light leading-relaxed">
-                    {item.answer}
+                <div
+                  className={`grid transition-all duration-300 ease-out ${
+                    isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <div className="px-5 md:px-6 pb-5 md:pb-6 text-text-light leading-relaxed">
+                      {item.answer}
+                    </div>
                   </div>
-                )}
+                </div>
               </li>
             );
           })}
-        </ul>
+        </Reveal>
       </div>
 
       <script

@@ -143,7 +143,7 @@ export default function ChatWidget() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-24 right-4 md:bottom-6 md:right-6 z-50 flex items-center gap-2 px-4 py-3 bg-primary text-white rounded-full shadow-lg hover:bg-primary-light transition-all hover:shadow-xl"
+          className="fixed bottom-24 right-4 md:bottom-6 md:right-6 z-50 flex items-center gap-2 px-4 py-3 bg-primary text-white rounded-full shadow-[var(--shadow-lift)] hover:bg-primary-light transition-all hover:-translate-y-0.5"
           aria-label="Chat öffnen"
         >
           <MessageSquare size={20} />

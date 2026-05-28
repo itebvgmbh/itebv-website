@@ -2,17 +2,31 @@
 @plugin "@tailwindcss/typography";
 
 @theme {
-  --color-primary: #0056A4;
-  --color-primary-light: #1A6FBE;
-  --color-primary-dark: #003D75;
-  --color-accent: #E8F1FA;
-  --color-text: #1a1a1a;
-  --color-text-light: #555555;
+  --color-primary: #0B5BD3;
+  --color-primary-light: #1B6FE8;
+  --color-primary-dark: #0847A8;
+  --color-primary-deep: #062F70;
+
+  --color-accent: #EEF4FC;
+  --color-accent-strong: #DCE8F9;
+
+  --color-text: #0F172A;
+  --color-text-strong: #0B1220;
+  --color-text-light: #475569;
+  --color-text-muted: #64748B;
+
   --color-bg: #ffffff;
-  --color-bg-alt: #F5F8FC;
-  --color-border: #DDE4ED;
+  --color-bg-alt: #F6F8FC;
+  --color-bg-deep: #0B1220;
+
+  --color-border: #E2E8F0;
+  --color-border-strong: #CBD5E1;
 
   --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+
+  --shadow-soft: 0 1px 2px 0 rgba(15, 23, 42, 0.04), 0 1px 3px 0 rgba(15, 23, 42, 0.05);
+  --shadow-card: 0 2px 6px -2px rgba(15, 23, 42, 0.06), 0 8px 24px -8px rgba(15, 23, 42, 0.08);
+  --shadow-lift: 0 6px 14px -6px rgba(11, 91, 211, 0.18), 0 18px 36px -18px rgba(15, 23, 42, 0.18);
 }
 
 html {
@@ -25,16 +39,101 @@ body {
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "ss01", "cv11";
+}
+
+::selection {
+  background: var(--color-accent-strong);
+  color: var(--color-primary-deep);
 }
 
 .section-padding {
   @apply py-20 md:py-28;
 }
 
+.section-padding-sm {
+  @apply py-14 md:py-20;
+}
+
 .container-narrow {
-  @apply mx-auto max-w-4xl px-6;
+  @apply mx-auto max-w-3xl px-6;
 }
 
 .container-wide {
   @apply mx-auto max-w-6xl px-6;
+}
+
+.eyebrow {
+  @apply inline-block text-xs font-semibold uppercase tracking-[0.14em] text-primary;
+}
+
+.heading-display {
+  @apply text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight text-text-strong;
+}
+
+.heading-h1 {
+  @apply text-4xl md:text-5xl font-bold leading-[1.1] tracking-tight text-text-strong;
+}
+
+.heading-h2 {
+  @apply text-3xl md:text-4xl font-bold leading-[1.15] tracking-tight text-text-strong;
+}
+
+.heading-h3 {
+  @apply text-xl md:text-2xl font-semibold leading-snug text-text-strong;
+}
+
+.lead {
+  @apply text-lg md:text-xl text-text-light leading-relaxed;
+}
+
+.card-base {
+  @apply rounded-2xl border border-border bg-white shadow-[var(--shadow-soft)];
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-[var(--shadow-card)];
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-primary text-white font-semibold rounded-xl shadow-[var(--shadow-soft)] hover:bg-primary-light hover:shadow-[var(--shadow-lift)] active:bg-primary-dark transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-text font-semibold rounded-xl border border-border hover:border-primary hover:text-primary transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2;
+}
+
+.icon-badge {
+  @apply inline-flex items-center justify-center size-11 rounded-xl bg-accent text-primary ring-1 ring-inset ring-primary/10;
+}
+
+@keyframes reveal-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.reveal.is-visible {
+  animation: reveal-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    animation: none;
+    transform: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }

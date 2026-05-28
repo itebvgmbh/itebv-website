@@ -1,5 +1,7 @@
 import { siteConfig } from "@/lib/config";
 import { ExternalLink } from "lucide-react";
+import SectionHeader from "@/components/ui/SectionHeader";
+import Reveal from "@/components/ui/Reveal";
 
 interface Reference {
   title: string;
@@ -56,49 +58,53 @@ export default function References() {
   return (
     <section id="referenzen" className="section-padding bg-bg">
       <div className="container-wide">
-        <h2 className="text-3xl md:text-4xl font-bold text-text mb-16 text-center">
-          Referenzen
-        </h2>
+        <SectionHeader
+          eyebrow="Referenzen"
+          title="Ausgewählte Projekte"
+          lead="Konkrete Beispiele, was im Mittelstand mit pragmatischer IT, Software und KI möglich ist."
+        />
 
-        <div className="grid md:grid-cols-2 gap-8 lg:gap-10">
+        <div className="grid md:grid-cols-2 gap-6 lg:gap-7">
           {references.map((ref, index) => (
-            <article
-              key={index}
-              className="group border border-border rounded-xl overflow-hidden bg-white hover:border-primary/30 transition-colors"
-            >
-              <div className="p-6 md:p-8">
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <span className="inline-block px-3 py-1 text-xs font-medium text-primary bg-accent rounded-full">
+            <Reveal key={index} delay={index * 70}>
+              <article className="card-base card-hover group h-full flex flex-col p-7 md:p-8">
+                <div className="flex items-start justify-between gap-4 mb-5">
+                  <span className="inline-flex items-center px-3 py-1 text-xs font-semibold text-primary bg-accent rounded-full ring-1 ring-inset ring-primary/15">
                     {ref.tag}
                   </span>
                   {ref.logo && (
-                    <div className="relative h-8 w-24 flex-shrink-0 grayscale opacity-60">
+                    <div className="relative h-7 w-24 flex-shrink-0 grayscale opacity-60">
                       <img
                         src={ref.logo.src}
                         alt={ref.logo.alt}
                         className="h-full w-full object-contain object-right"
+                        loading="lazy"
                       />
                     </div>
                   )}
                 </div>
-                <h3 className="text-xl font-semibold text-text mb-2">{ref.title}</h3>
+                <h3 className="text-lg md:text-xl font-semibold text-text-strong mb-2 leading-snug">
+                  {ref.title}
+                </h3>
                 {ref.subtitle && (
                   <p className="text-primary font-medium text-sm mb-3">{ref.subtitle}</p>
                 )}
-                <p className="text-text-light text-sm leading-relaxed">{ref.description}</p>
+                <p className="text-text-light text-sm leading-relaxed flex-1">
+                  {ref.description}
+                </p>
                 {ref.href && ref.external && (
                   <a
                     href={ref.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 mt-4 text-primary text-sm font-medium hover:text-primary-light transition-colors"
+                    className="inline-flex items-center gap-2 mt-5 text-primary text-sm font-semibold hover:gap-2.5 transition-all"
                   >
                     Projekt ansehen
-                    <ExternalLink size={16} />
+                    <ExternalLink size={14} />
                   </a>
                 )}
-              </div>
-            </article>
+              </article>
+            </Reveal>
           ))}
         </div>
       </div>

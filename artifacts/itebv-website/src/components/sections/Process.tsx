@@ -1,4 +1,6 @@
 import { Clock, FileOutput, Users } from "lucide-react";
+import SectionHeader from "@/components/ui/SectionHeader";
+import Reveal from "@/components/ui/Reveal";
 
 interface Step {
   number: number;
@@ -22,7 +24,7 @@ function StepMeta({ icon: Icon, label, value }: { icon: typeof Clock; label: str
     <div className="flex items-start gap-2 text-xs md:text-sm">
       <Icon size={14} className="text-primary shrink-0 mt-0.5" />
       <span className="text-text-light">
-        <span className="font-semibold text-text">{label}:</span> {value}
+        <span className="font-semibold text-text-strong">{label}:</span> {value}
       </span>
     </div>
   );
@@ -30,35 +32,33 @@ function StepMeta({ icon: Icon, label, value }: { icon: typeof Clock; label: str
 
 export default function Process() {
   return (
-    <section className="section-padding bg-bg">
+    <section className="section-padding bg-bg-alt">
       <div className="container-narrow">
-        <h2 className="text-3xl md:text-4xl font-bold text-text mb-4 text-center">
-          So läuft ein Projekt ab
-        </h2>
-        <p className="text-text-light text-center max-w-2xl mx-auto mb-12">
-          Transparent von Tag eins: Dauer, Liefergegenstände und der Aufwand,
-          den ich von Ihrer Seite brauche.
-        </p>
+        <SectionHeader
+          eyebrow="Ablauf"
+          title="So läuft ein Projekt ab"
+          lead="Transparent von Tag eins: Dauer, Liefergegenstände und der Aufwand, den ich von Ihrer Seite brauche."
+        />
         <div className="relative">
-          <div className="absolute left-6 top-6 bottom-6 w-0.5 bg-border -translate-x-1/2 hidden md:block" />
-          <div className="space-y-0">
-            {steps.map((step) => (
-              <div key={step.number} className="relative flex gap-6 md:gap-8 pb-10 last:pb-0">
-                <div className="relative z-10 flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white font-bold text-lg">
+          <div className="absolute left-6 top-6 bottom-10 w-px bg-border-strong -translate-x-1/2 hidden md:block" aria-hidden="true" />
+          <ol className="space-y-0">
+            {steps.map((step, i) => (
+              <Reveal key={step.number} delay={i * 70} as="li" className="relative flex gap-6 md:gap-8 pb-10 last:pb-0">
+                <div className="relative z-10 flex-shrink-0 flex items-center justify-center w-12 h-12 rounded-full bg-primary text-white font-bold text-lg shadow-[var(--shadow-soft)] ring-4 ring-bg-alt">
                   {step.number}
                 </div>
-                <div className="flex-1 pt-1">
-                  <h3 className="text-xl font-bold text-text mb-2">{step.title}</h3>
-                  <p className="text-text-light mb-4">{step.description}</p>
-                  <div className="grid sm:grid-cols-3 gap-2 sm:gap-4 p-3 sm:p-4 rounded-lg bg-bg-alt border border-border">
+                <div className="flex-1 pt-1.5">
+                  <h3 className="heading-h3 mb-2">{step.title}</h3>
+                  <p className="text-text-light mb-4 leading-relaxed">{step.description}</p>
+                  <div className="grid sm:grid-cols-3 gap-2.5 sm:gap-4 p-4 rounded-xl bg-white border border-border">
                     <StepMeta icon={Clock} label="Dauer" value={step.duration} />
                     <StepMeta icon={FileOutput} label="Ergebnis" value={step.output} />
                     <StepMeta icon={Users} label="Ihr Aufwand" value={step.effort} />
                   </div>
                 </div>
-              </div>
+              </Reveal>
             ))}
-          </div>
+          </ol>
         </div>
       </div>
     </section>

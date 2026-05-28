@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { siteConfig } from "@/lib/config";
 import { Send, Mail, Phone, MapPin, CheckCircle, MessageSquare } from "lucide-react";
+import Reveal from "@/components/ui/Reveal";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -62,36 +63,36 @@ export default function Contact() {
     }
   };
 
+  const inputClass =
+    "w-full px-4 py-3 bg-white rounded-xl border border-border text-text placeholder:text-text-muted/70 focus:outline-none focus:ring-4 focus:ring-primary/15 focus:border-primary transition-all";
+
   return (
-    <section id="kontakt" className="section-padding">
+    <section id="kontakt" className="section-padding bg-bg">
       <div className="container-wide">
-        <div className="grid md:grid-cols-2 gap-16">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold text-text leading-tight mb-6">
-              Kostenloses 20-Min Erstgespräch
-            </h2>
-            <p className="text-lg text-text-light mb-6">
+        <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
+          <Reveal>
+            <p className="eyebrow mb-4">Kontakt</p>
+            <h2 className="heading-h2 mb-5">Kostenloses 20-Min Erstgespräch</h2>
+            <p className="lead mb-6">
               Sie erzählen mir, was Sie beschäftigt. Ich sage Ihnen ehrlich, ob
               und wie ich helfen kann. Kein Verkaufsgespräch, keine
               Verpflichtung.
             </p>
-            <ul className="text-sm text-text-light space-y-2 mb-10">
-              <li className="flex items-start gap-2">
-                <CheckCircle size={16} className="text-primary shrink-0 mt-0.5" />
-                <span>Antwort in der Regel innerhalb eines Werktags</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle size={16} className="text-primary shrink-0 mt-0.5" />
-                <span>Per Video-Call, Telefon oder in Berlin vor Ort</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <CheckCircle size={16} className="text-primary shrink-0 mt-0.5" />
-                <span>Ehrliche Einschätzung – auch wenn ich nicht der Richtige bin</span>
-              </li>
+            <ul className="text-sm text-text-light space-y-2.5 mb-10">
+              {[
+                "Antwort in der Regel innerhalb eines Werktags",
+                "Per Video-Call, Telefon oder in Berlin vor Ort",
+                "Ehrliche Einschätzung – auch wenn ich nicht der Richtige bin",
+              ].map((t) => (
+                <li key={t} className="flex items-start gap-2.5">
+                  <CheckCircle size={16} className="text-primary shrink-0 mt-0.5" />
+                  <span>{t}</span>
+                </li>
+              ))}
             </ul>
 
-            <div className="space-y-4 mb-10">
-              <h3 className="text-sm font-semibold text-text-light uppercase tracking-wider">
+            <div className="space-y-4 mb-8">
+              <h3 className="text-xs font-semibold text-text-muted uppercase tracking-wider">
                 Oder direkt erreichen
               </h3>
               <a
@@ -120,10 +121,10 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="flex items-start gap-3 p-4 bg-accent rounded-lg border border-primary/10">
+            <div className="flex items-start gap-3 p-4 bg-accent rounded-xl border border-primary/10">
               <MessageSquare size={20} className="text-primary shrink-0 mt-0.5" />
               <div>
-                <p className="text-sm font-medium text-text">
+                <p className="text-sm font-semibold text-text-strong">
                   Schnelle Frage? Probieren Sie den Chatbot.
                 </p>
                 <p className="text-sm text-text-light mt-1">
@@ -132,13 +133,13 @@ export default function Contact() {
                 </p>
               </div>
             </div>
-          </div>
+          </Reveal>
 
-          <div>
+          <Reveal delay={120}>
             {status === "success" ? (
-              <div className="flex flex-col items-center justify-center h-full text-center p-8 bg-bg-alt rounded-2xl border border-border">
+              <div className="flex flex-col items-center justify-center h-full text-center p-10 card-base">
                 <CheckCircle size={48} className="text-primary mb-4" />
-                <h3 className="text-xl font-bold text-text mb-2">
+                <h3 className="heading-h3 mb-2">
                   Vielen Dank für Ihre Nachricht!
                 </h3>
                 <p className="text-text-light mb-6">
@@ -154,10 +155,10 @@ export default function Contact() {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="relative space-y-5 p-8 bg-bg-alt rounded-2xl border border-border"
+                className="relative space-y-5 p-7 md:p-8 card-base shadow-[var(--shadow-card)]"
               >
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-text mb-1.5">
+                  <label htmlFor="name" className="block text-sm font-medium text-text-strong mb-1.5">
                     Name *
                   </label>
                   <input
@@ -168,12 +169,12 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Ihr Name"
-                    className="w-full px-4 py-3 bg-white rounded-lg border border-border text-text placeholder:text-text-light/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
+                    className={inputClass}
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-text mb-1.5">
+                  <label htmlFor="email" className="block text-sm font-medium text-text-strong mb-1.5">
                     E-Mail *
                   </label>
                   <input
@@ -184,14 +185,14 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="ihre@email.de"
-                    className="w-full px-4 py-3 bg-white rounded-lg border border-border text-text placeholder:text-text-light/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
+                    className={inputClass}
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-text mb-1.5">
+                  <label htmlFor="phone" className="block text-sm font-medium text-text-strong mb-1.5">
                     Telefon{" "}
-                    <span className="text-text-light font-normal">(optional)</span>
+                    <span className="text-text-muted font-normal">(optional)</span>
                   </label>
                   <input
                     type="tel"
@@ -200,12 +201,12 @@ export default function Contact() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="+49 ..."
-                    className="w-full px-4 py-3 bg-white rounded-lg border border-border text-text placeholder:text-text-light/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors"
+                    className={inputClass}
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-text mb-1.5">
+                  <label htmlFor="message" className="block text-sm font-medium text-text-strong mb-1.5">
                     Wie kann ich Ihnen helfen? *
                   </label>
                   <textarea
@@ -216,7 +217,7 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Erzählen Sie mir kurz, was Sie beschäftigt – ich melde mich bei Ihnen."
-                    className="w-full px-4 py-3 bg-white rounded-lg border border-border text-text placeholder:text-text-light/50 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-colors resize-none"
+                    className={`${inputClass} resize-none`}
                   />
                 </div>
 
@@ -264,7 +265,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={status === "sending" || !consent}
-                  className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-primary text-white font-medium rounded-lg hover:bg-primary-light transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                  className="btn-primary w-full disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:shadow-[var(--shadow-soft)]"
                 >
                   {status === "sending" ? (
                     "Wird gesendet..."
@@ -277,7 +278,7 @@ export default function Contact() {
                 </button>
               </form>
             )}
-          </div>
+          </Reveal>
         </div>
       </div>
     </section>

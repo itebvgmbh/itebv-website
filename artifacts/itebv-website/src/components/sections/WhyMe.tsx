@@ -1,4 +1,6 @@
 import { Lightbulb, Target, MessageCircle, Handshake } from "lucide-react";
+import SectionHeader from "@/components/ui/SectionHeader";
+import Reveal from "@/components/ui/Reveal";
 
 const items = [
   {
@@ -25,29 +27,28 @@ const items = [
 
 export default function WhyMe() {
   return (
-    <section className="section-padding bg-bg-alt">
+    <section className="section-padding bg-bg">
       <div className="container-wide">
-        <h2 className="text-3xl md:text-4xl font-bold text-text mb-4 text-center">
-          Warum mit mir arbeiten?
-        </h2>
-        <p className="text-text-light text-center max-w-2xl mx-auto mb-12">
-          Vier Prinzipien, die jeden Auftrag prägen.
-        </p>
-        <div className="grid md:grid-cols-2 gap-8">
-          {items.map((item) => {
+        <SectionHeader
+          eyebrow="Warum ITEBV"
+          title="Warum mit mir arbeiten?"
+          lead="Vier Prinzipien, die jeden Auftrag prägen."
+        />
+        <div className="grid md:grid-cols-2 gap-6 md:gap-7">
+          {items.map((item, i) => {
             const Icon = item.icon;
             return (
-              <article key={item.title} className="flex gap-5 p-6 rounded-xl bg-white border border-border">
-                <div className="shrink-0">
-                  <div className="flex items-center justify-center size-12 rounded-lg bg-accent">
-                    <Icon className="size-6 text-primary" />
+              <Reveal key={item.title} delay={i * 80}>
+                <article className="card-base card-hover h-full flex gap-5 p-7">
+                  <div className="icon-badge shrink-0">
+                    <Icon size={22} />
                   </div>
-                </div>
-                <div>
-                  <h3 className="text-lg md:text-xl font-bold text-text mb-2">{item.title}</h3>
-                  <p className="text-text-light">{item.text}</p>
-                </div>
-              </article>
+                  <div>
+                    <h3 className="heading-h3 mb-2.5">{item.title}</h3>
+                    <p className="text-text-light leading-relaxed">{item.text}</p>
+                  </div>
+                </article>
+              </Reveal>
             );
           })}
         </div>

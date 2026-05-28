@@ -6,6 +6,8 @@ import {
   ShoppingBag,
   GraduationCap,
 } from "lucide-react";
+import SectionHeader from "@/components/ui/SectionHeader";
+import Reveal from "@/components/ui/Reveal";
 
 const industries = [
   { icon: Factory, name: "Industrie & Produktion", examples: "ERP-Optimierung, MES-Anbindung, Produktionsdaten-Auswertung" },
@@ -18,27 +20,28 @@ const industries = [
 
 export default function Industries() {
   return (
-    <section id="branchen" className="section-padding bg-bg">
+    <section id="branchen" className="section-padding bg-bg-alt">
       <div className="container-wide">
-        <h2 className="text-3xl md:text-4xl font-bold text-text mb-4 text-center">
-          Für wen ich arbeite
-        </h2>
-        <p className="text-text-light text-center max-w-2xl mx-auto mb-12">
-          Typische Branchen und Anwendungsfälle. Wenn Sie sich nicht
-          wiederfinden: Fragen Sie trotzdem – meist passt die Methode auch zu
-          Ihrem Fall.
-        </p>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {industries.map((industry) => {
+        <SectionHeader
+          eyebrow="Branchen"
+          title="Für wen ich arbeite"
+          lead="Typische Branchen und Anwendungsfälle. Wenn Sie sich nicht wiederfinden: Fragen Sie trotzdem – meist passt die Methode auch zu Ihrem Fall."
+        />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {industries.map((industry, i) => {
             const Icon = industry.icon;
             return (
-              <div key={industry.name} className="p-5 rounded-xl border border-border bg-bg-alt">
-                <div className="flex items-center gap-3 mb-2">
-                  <Icon className="size-7 text-primary shrink-0" />
-                  <h3 className="font-bold text-text">{industry.name}</h3>
+              <Reveal key={industry.name} delay={i * 60}>
+                <div className="card-base card-hover h-full p-6">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="icon-badge size-10">
+                      <Icon size={18} />
+                    </span>
+                    <h3 className="font-semibold text-text-strong">{industry.name}</h3>
+                  </div>
+                  <p className="text-sm text-text-light leading-relaxed">{industry.examples}</p>
                 </div>
-                <p className="text-sm text-text-light">{industry.examples}</p>
-              </div>
+              </Reveal>
             );
           })}
         </div>
