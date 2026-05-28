@@ -143,7 +143,7 @@ export default function AnalysePage() {
               gemeinsam Ihre Digitalisierungsstrategie entwickeln.
             </p>
             <a
-              href="/#kontakt"
+              href="/#kontakt-formular"
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-white text-primary font-semibold rounded-xl shadow-lg hover:bg-bg-alt transition-colors"
             >
               {siteConfig.primaryCtaLabel}

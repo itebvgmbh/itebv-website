@@ -76,7 +76,7 @@ export default function Footer() {
               20&nbsp;Minuten, unverbindlich. Sie erzählen, ich höre zu.
             </p>
             <a
-              href="/#kontakt"
+              href="/#kontakt-formular"
               className="inline-flex items-center gap-2 px-5 py-3 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-light transition-colors mb-7"
             >
               Termin anfragen

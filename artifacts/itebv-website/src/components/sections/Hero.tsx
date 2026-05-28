@@ -49,7 +49,7 @@ export default function Hero() {
             </ul>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-10">
-              <a href="/#kontakt" className="btn-primary">
+              <a href="/#kontakt-formular" className="btn-primary">
                 {siteConfig.primaryCtaLabel}
                 <ArrowRight className="size-5" />
               </a>

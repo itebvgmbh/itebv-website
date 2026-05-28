@@ -63,7 +63,7 @@ export default function Header() {
               </a>
             );
           })}
-          <a href="/#kontakt" className="ml-3 btn-primary px-5 py-2.5 text-sm rounded-lg">
+          <a href="/#kontakt-formular" className="ml-3 btn-primary px-5 py-2.5 text-sm rounded-lg">
             {siteConfig.primaryCtaLabel}
           </a>
         </nav>
@@ -92,7 +92,7 @@ export default function Header() {
               </a>
             ))}
             <a
-              href="/#kontakt"
+              href="/#kontakt-formular"
               onClick={() => setMobileOpen(false)}
               className="btn-primary mt-3 px-5 py-3 text-sm"
             >

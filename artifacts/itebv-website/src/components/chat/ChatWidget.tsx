@@ -92,11 +92,11 @@ export default function ChatWidget() {
     return text
       .replace(
         /\[Kontaktformular\]/g,
-        `<a href="/#kontakt" class="text-primary underline hover:text-primary-light">Kontaktformular</a>`
+        `<a href="/#kontakt-formular" class="text-primary underline hover:text-primary-light">Kontaktformular</a>`
       )
       .replace(
         /\[Terminbuchung\]/g,
-        `<a href="/#kontakt" class="text-primary underline hover:text-primary-light">Kontaktformular</a>`
+        `<a href="/#kontakt-formular" class="text-primary underline hover:text-primary-light">Kontaktformular</a>`
       );
   };
 

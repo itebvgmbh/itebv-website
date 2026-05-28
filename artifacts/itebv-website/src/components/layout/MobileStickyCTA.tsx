@@ -14,7 +14,7 @@ export default function MobileStickyCTA() {
           Anrufen
         </a>
         <a
-          href="/#kontakt"
+          href="/#kontakt-formular"
           className="flex items-center justify-center gap-2 px-4 py-3 bg-primary text-white font-semibold text-sm rounded-xl hover:bg-primary-light transition-colors shadow-[var(--shadow-soft)]"
         >
           <CalendarCheck size={16} />
