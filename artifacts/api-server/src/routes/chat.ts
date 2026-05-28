@@ -47,27 +47,40 @@ router.post("/chat", async (req: Request, res: Response) => {
       res.end();
     };
 
-    const stream = anthropic.messages.stream({
+    const stream = await anthropic.messages.create({
       model: "claude-sonnet-4-5-20250929",
       max_tokens: 1024,
       system: SYSTEM_PROMPT,
       messages: formattedMessages,
+      stream: true,
     });
 
-    stream.finalMessage().catch(() => {
-      // Already handled via 'error'/'end' events; swallow to avoid
-      // unhandled promise rejection when the client aborts.
-    });
-
-    stream.on("text", (text: string) => {
+    req.on("close", () => {
       if (!closed) {
-        res.write(`data: ${JSON.stringify({ text })}\n\n`);
+        closed = true;
+        try {
+          stream.controller.abort();
+        } catch {
+          // ignore
+        }
       }
     });
 
-    stream.on("end", () => safeWriteEnd());
-
-    stream.on("error", (error: unknown) => {
+    try {
+      for await (const event of stream) {
+        if (closed) break;
+        if (
+          event.type === "content_block_delta" &&
+          event.delta.type === "text_delta"
+        ) {
+          res.write(`data: ${JSON.stringify({ text: event.delta.text })}\n\n`);
+        }
+      }
+      safeWriteEnd();
+    } catch (error) {
+      if (closed) {
+        return;
+      }
       logger.error({ err: error }, "Chat stream error");
       const err = error as { error?: { message?: string }; message?: string };
       const msg =
@@ -75,18 +88,7 @@ router.post("/chat", async (req: Request, res: Response) => {
         err?.message ||
         "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.";
       safeWriteEnd({ error: msg });
-    });
-
-    req.on("close", () => {
-      if (!closed) {
-        closed = true;
-        try {
-          stream.abort?.();
-        } catch {
-          // ignore
-        }
-      }
-    });
+    }
   } catch (error) {
     logger.error({ err: error }, "Chat API error");
     if (!res.headersSent) {
