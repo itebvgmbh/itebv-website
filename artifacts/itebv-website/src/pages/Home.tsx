@@ -8,8 +8,15 @@ import CustomerLogos from "@/components/sections/CustomerLogos";
 import AboutMe from "@/components/sections/AboutMe";
 import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
+import { useSeo } from "@/hooks/useSeo";
+import { siteConfig } from "@/lib/config";
 
 export default function HomePage() {
+  useSeo({
+    title: siteConfig.siteTitle,
+    description: siteConfig.siteDescription,
+    path: "/",
+  });
   return (
     <>
       <Hero />

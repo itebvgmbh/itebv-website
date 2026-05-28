@@ -4,9 +4,12 @@ import { siteConfig } from "@/lib/config";
 import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structured-data";
 import ServiceCrossLinks from "@/components/ui/ServiceCrossLinks";
 import Reveal from "@/components/ui/Reveal";
+import { useSeo } from "@/hooks/useSeo";
 
 const pageDescription =
   "ITEBV setzt KI pragmatisch ein: Chatbots, Voice Agents, Prozessautomatisierung und RAG-Wissensdatenbanken. KI als Werkzeug, nicht als Spielerei. KI-Beratung aus Berlin, deutschlandweit.";
+const pageTitle =
+  "KI-Lösungen für den Mittelstand | ITEBV – KI-Beratung Berlin";
 const slug = "/ki-loesungen";
 
 const offerings = [
@@ -17,6 +20,7 @@ const offerings = [
 ];
 
 export default function KiLoesungenPage() {
+  useSeo({ title: pageTitle, description: pageDescription, path: slug });
   const serviceSchema = getServiceJsonLd({
     name: "KI-Lösungen für den Geschäftsalltag",
     description: pageDescription,

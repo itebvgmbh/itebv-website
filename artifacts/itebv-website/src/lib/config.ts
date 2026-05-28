@@ -22,7 +22,7 @@ export const siteConfig = {
   googleBusinessUrl: "",
 
   stefanFoto: "/images/stefan.jpg",
-  ogImage: "/images/og-image.jpg",
+  ogImage: "/opengraph.jpg",
 
   siteUrl: "https://itebv.de",
   siteTitle:

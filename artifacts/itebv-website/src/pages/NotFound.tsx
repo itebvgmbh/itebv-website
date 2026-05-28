@@ -1,6 +1,13 @@
 import { Link } from "wouter";
+import { useSeo } from "@/hooks/useSeo";
 
 export default function NotFound() {
+  useSeo({
+    title: "Seite nicht gefunden | ITEBV GmbH",
+    description: "Die angeforderte Seite konnte nicht gefunden werden.",
+    path: "/404",
+    noindex: true,
+  });
   return (
     <section className="section-padding bg-bg-alt min-h-[60vh] flex items-center">
       <div className="container-narrow text-center">
