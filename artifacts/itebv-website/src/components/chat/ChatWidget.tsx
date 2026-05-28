@@ -105,7 +105,7 @@ export default function ChatWidget() {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="fixed bottom-24 right-4 md:bottom-6 md:right-6 z-50 flex items-center gap-2 px-4 py-3 bg-primary text-white rounded-full shadow-[var(--shadow-lift)] hover:bg-primary-light transition-all hover:-translate-y-0.5"
+          className="fixed bottom-28 right-4 md:bottom-6 md:right-6 z-50 flex items-center gap-2 px-4 py-3 bg-primary text-white rounded-full shadow-[var(--shadow-lift)] hover:bg-primary-light transition-all hover:-translate-y-0.5"
           aria-label="Chat öffnen"
         >
           <MessageSquare size={20} />
@@ -114,7 +114,7 @@ export default function ChatWidget() {
       )}
 
       {isOpen && (
-        <div className="fixed bottom-24 right-4 md:bottom-6 md:right-6 z-50 w-[380px] max-w-[calc(100vw-2rem)] h-[520px] max-h-[calc(100vh-9rem)] md:max-h-[calc(100vh-6rem)] bg-white rounded-2xl shadow-2xl border border-border flex flex-col overflow-hidden">
+        <div className="fixed left-3 right-3 bottom-28 md:left-auto md:right-6 md:bottom-6 z-50 w-auto md:w-[380px] h-[520px] max-h-[calc(100vh-10rem)] md:max-h-[calc(100vh-6rem)] bg-white rounded-2xl shadow-2xl border border-border flex flex-col overflow-hidden">
           <div className="flex items-center justify-between px-4 py-3 bg-primary text-white rounded-t-2xl">
             <div className="flex items-center gap-2">
               <MessageSquare size={18} />
