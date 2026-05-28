@@ -150,14 +150,21 @@ Diese E-Mail wurde automatisch vom Website-Chatbot generiert.
       },
     });
 
-    await transporter.sendMail({
-      from: process.env.EMAIL_SMTP_USER,
-      to: process.env.NOTIFICATION_EMAIL || "st@itebv.de",
+    const to = process.env.NOTIFICATION_EMAIL || "st@itebv.de";
+    const from = process.env.EMAIL_FROM || to;
+    const info = await transporter.sendMail({
+      from: `"ITEBV Website" <${from}>`,
+      to,
       subject: `[ITEBV Website] Neue Chatbot-Anfrage – ${timestamp}`,
       text: emailBody,
     });
 
-    res.json({ ok: true });
+    logger.info(
+      { messageId: info.messageId, response: info.response, accepted: info.accepted, rejected: info.rejected, from, to },
+      "Lead-E-Mail an SMTP übergeben",
+    );
+
+    res.json({ ok: true, messageId: info.messageId });
   } catch (error) {
     logger.error({ err: error }, "Fehler beim Senden der Lead-E-Mail");
     res.status(500).json({ error: "E-Mail konnte nicht gesendet werden." });
