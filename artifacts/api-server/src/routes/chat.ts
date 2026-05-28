@@ -26,69 +26,18 @@ router.post("/chat", async (req: Request, res: Response) => {
       content: msg.content,
     }));
 
-    res.setHeader("Content-Type", "text/event-stream");
-    res.setHeader("Cache-Control", "no-cache");
-    res.setHeader("Connection", "keep-alive");
-    res.setHeader("X-Accel-Buffering", "no");
-    res.flushHeaders?.();
-
-    let closed = false;
-    const safeWriteEnd = (errorData?: { error: string }) => {
-      if (closed) return;
-      closed = true;
-      try {
-        if (errorData) {
-          res.write(`data: ${JSON.stringify(errorData)}\n\n`);
-        }
-        res.write("data: [DONE]\n\n");
-      } catch {
-        // ignore
-      }
-      res.end();
-    };
-
-    const stream = await anthropic.messages.create({
+    const completion = await anthropic.messages.create({
       model: "claude-sonnet-4-5-20250929",
       max_tokens: 1024,
       system: SYSTEM_PROMPT,
       messages: formattedMessages,
-      stream: true,
     });
 
-    req.on("close", () => {
-      if (!closed) {
-        closed = true;
-        try {
-          stream.controller.abort();
-        } catch {
-          // ignore
-        }
-      }
-    });
+    const text = completion.content
+      .map((block) => (block.type === "text" ? block.text : ""))
+      .join("");
 
-    try {
-      for await (const event of stream) {
-        if (closed) break;
-        if (
-          event.type === "content_block_delta" &&
-          event.delta.type === "text_delta"
-        ) {
-          res.write(`data: ${JSON.stringify({ text: event.delta.text })}\n\n`);
-        }
-      }
-      safeWriteEnd();
-    } catch (error) {
-      if (closed) {
-        return;
-      }
-      logger.error({ err: error }, "Chat stream error");
-      const err = error as { error?: { message?: string }; message?: string };
-      const msg =
-        err?.error?.message ||
-        err?.message ||
-        "Ein Fehler ist aufgetreten. Bitte versuchen Sie es später erneut.";
-      safeWriteEnd({ error: msg });
-    }
+    res.json({ text });
   } catch (error) {
     logger.error({ err: error }, "Chat API error");
     if (!res.headersSent) {
