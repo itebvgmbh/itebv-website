@@ -4,6 +4,7 @@ const customerLogos = [
   { src: "/images/Linde_plc_logo.png", alt: "Linde plc – ERP-Beratung" },
   { src: "/images/psi.png", alt: "PSI Software AG – IT-Beratung" },
   { src: "/images/kroenert.png", alt: "KROENERT – Industrieprojekt" },
+  { src: "/images/014_main.jpg", alt: "Trützschler – Industrieprojekt" },
   { src: "/images/rissel.png", alt: "Rolf Rissel – Digitalisierungskonzept" },
 ];
 

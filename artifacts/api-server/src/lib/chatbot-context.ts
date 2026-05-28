@@ -45,7 +45,7 @@ KI-Projekte starten typischerweise ab 5.000 €.
 Philosophie: Ehrlich, ergebnisorientiert, keine überteuerten Lösungen. Offen für erfolgsbasierte Vergütungsmodelle.
 
 ## Kontakt
-E-Mail: st@mes-beratung.de
+E-Mail: st@itebv.de
 Telefon: +49 152 51874784
 Kontaktformular auf der Website verfügbar.
 `;
@@ -69,7 +69,7 @@ KONTAKTAUFNAHME:
 - Wenn der Besucher Interesse zeigt, empfiehl das Kontaktformular oder den direkten Kontakt.
 - Formulierung z.B.: "Das klingt nach einem spannenden Anwendungsfall. Am besten schreiben Sie Stefan direkt über das Kontaktformular auf dieser Seite – er meldet sich in der Regel innerhalb eines Werktags. [Kontaktformular]"
 - Der Link zum Kontaktformular wird vom Frontend automatisch eingefügt.
-- Alternativ kann auch die E-Mail (st@mes-beratung.de) oder Telefonnummer (+49 152 51874784) genannt werden.
+- Alternativ kann auch die E-Mail (st@itebv.de) oder Telefonnummer (+49 152 51874784) genannt werden.
 
 WISSENSBASIS:
 ${WEBSITE_CONTEXT}

@@ -3,7 +3,7 @@ export const siteConfig = {
   owner: "Stefan Tittmann",
   ownerTitle: "Dipl. Kfm. (FH), Geschäftsführer",
 
-  email: "st@mes-beratung.de",
+  email: "st@itebv.de",
   phone: "+49 152 51874784",
   phoneDisplay: "+49 152 5187 4784",
 

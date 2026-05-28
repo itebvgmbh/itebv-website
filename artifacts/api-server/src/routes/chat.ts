@@ -145,7 +145,7 @@ Diese E-Mail wurde automatisch vom Website-Chatbot generiert.
 
     await transporter.sendMail({
       from: process.env.EMAIL_SMTP_USER,
-      to: process.env.NOTIFICATION_EMAIL || "st@mes-beratung.de",
+      to: process.env.NOTIFICATION_EMAIL || "st@itebv.de",
       subject: `[ITEBV Website] Neue Chatbot-Anfrage – ${timestamp}`,
       text: emailBody,
     });

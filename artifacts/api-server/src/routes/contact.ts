@@ -58,7 +58,7 @@ Diese E-Mail wurde automatisch über das Kontaktformular auf itebv.de gesendet.
       await transporter.sendMail({
         from: process.env.EMAIL_SMTP_USER,
         replyTo: email,
-        to: process.env.NOTIFICATION_EMAIL || "st@mes-beratung.de",
+        to: process.env.NOTIFICATION_EMAIL || "st@itebv.de",
         subject: `[ITEBV Website] Kontaktanfrage von ${name}`,
         text: emailBody,
       });
