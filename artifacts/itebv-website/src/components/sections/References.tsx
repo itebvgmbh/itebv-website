@@ -44,10 +44,10 @@ const references: Reference[] = [
     logo: { src: "/images/rissel.png", alt: "Rolf Rissel Objekteinrichtungen" },
   },
   {
-    title: "10+ Jahre IT-Beratung für die Industrie",
+    title: "Das Fundament: Über ein Jahrzehnt Industrie-IT",
     subtitle: null,
     description:
-      "Bevor ich mich auf KI-Lösungen und individuelle Software fokussiert habe, habe ich über zehn Jahre lang Industrieunternehmen in der IT beraten, unter anderem Linde im Bereich ERP und Prozessoptimierung. Diese Erfahrung ist das Fundament, auf dem alles andere aufbaut: Ich verstehe, wie Unternehmen arbeiten, wo die typischen Probleme liegen und was eine Lösung in der Praxis aushalten muss.",
+      "Bevor ich mich auf KI-Lösungen und individuelle Software fokussiert habe, habe ich über zehn Jahre lang Unternehmen verschiedener Größen beraten – von ERP-Optimierung über Prozessdigitalisierung bis zur Systemintegration. Diese Erfahrung prägt jeden Auftrag: Ich weiß, was in der Praxis funktioniert und was nicht.",
     tag: "IT-Beratung",
     href: null,
     external: false,

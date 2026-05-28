@@ -114,18 +114,18 @@ export default function ChatWidget() {
       )}
 
       {isOpen && (
-        <div className="fixed left-3 right-3 bottom-28 md:left-auto md:right-6 md:bottom-6 z-50 w-auto md:w-[380px] h-[520px] max-h-[calc(100vh-10rem)] md:max-h-[calc(100vh-6rem)] bg-white rounded-2xl shadow-2xl border border-border flex flex-col overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 bg-primary text-white rounded-t-2xl">
-            <div className="flex items-center gap-2">
-              <MessageSquare size={18} />
-              <div>
-                <p className="text-sm font-semibold">ITEBV Assistent</p>
-                <p className="text-xs text-white/70">Fragen zum Angebot? Ich helfe gerne.</p>
+        <div className="fixed inset-x-3 bottom-28 md:inset-x-auto md:left-auto md:right-6 md:bottom-6 z-50 w-auto max-w-[calc(100vw-1.5rem)] md:max-w-none md:w-[380px] h-[520px] max-h-[calc(100dvh-10rem)] md:max-h-[calc(100dvh-6rem)] bg-white rounded-2xl shadow-2xl border border-border flex flex-col overflow-hidden">
+          <div className="flex items-center justify-between gap-2 px-4 py-3 bg-primary text-white rounded-t-2xl min-w-0">
+            <div className="flex items-center gap-2 min-w-0 flex-1">
+              <MessageSquare size={18} className="shrink-0" />
+              <div className="min-w-0">
+                <p className="text-sm font-semibold truncate">ITEBV Assistent</p>
+                <p className="text-xs text-white/70 truncate">Fragen zum Angebot? Ich helfe gerne.</p>
               </div>
             </div>
             <button
               onClick={() => setIsOpen(false)}
-              className="p-1 hover:bg-white/20 rounded transition-colors"
+              className="shrink-0 p-1 hover:bg-white/20 rounded transition-colors"
               aria-label="Chat schließen"
             >
               <X size={18} />
@@ -176,7 +176,7 @@ export default function ChatWidget() {
 
           <form
             onSubmit={handleSubmit}
-            className="flex items-center gap-2 px-3 py-3 border-t border-border"
+            className="flex items-center gap-2 px-3 py-3 border-t border-border min-w-0"
           >
             <input
               ref={inputRef}
@@ -184,13 +184,13 @@ export default function ChatWidget() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder="Ihre Frage..."
-              className="flex-1 px-3 py-2 text-sm bg-bg-alt rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
+              className="min-w-0 flex-1 px-3 py-2 text-base sm:text-sm bg-bg-alt rounded-lg border border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary"
               disabled={isLoading}
             />
             <button
               type="submit"
               disabled={isLoading || !input.trim()}
-              className="p-2 bg-primary text-white rounded-lg hover:bg-primary-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="shrink-0 p-2 bg-primary text-white rounded-lg hover:bg-primary-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               aria-label="Nachricht senden"
             >
               <Send size={16} />

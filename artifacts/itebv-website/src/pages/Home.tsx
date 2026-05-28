@@ -20,12 +20,12 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <CustomerLogos />
       <Services />
       <Industries />
       <WhyMe />
       <Process />
       <References />
-      <CustomerLogos />
       <AboutMe />
       <FAQ />
       <Contact />

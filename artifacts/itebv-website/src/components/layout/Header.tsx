@@ -31,18 +31,21 @@ export default function Header() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-50 overflow-hidden transition-all duration-200 ${
         scrolled
           ? "bg-white/85 backdrop-blur-md border-b border-border shadow-[0_1px_0_0_rgba(15,23,42,0.04)]"
           : "bg-white/70 backdrop-blur-md border-b border-transparent"
       }`}
     >
       <div className="container-wide flex items-center justify-between h-16 md:h-20">
-        <Link href="/" className="flex items-center group" aria-label="Startseite">
+        <Link href="/" className="flex items-center shrink-0 group" aria-label="Startseite">
           <img
             src="/images/itebv-logo.png"
             alt="ITEBV GmbH – KI- und IT-Beratung"
-            className="h-7 md:h-8 w-auto transition-transform group-hover:scale-[1.02]"
+            width={120}
+            height={32}
+            className="h-7 md:h-8 w-auto max-h-8 transition-transform group-hover:scale-[1.02]"
+            style={{ maxWidth: '140px' }}
           />
         </Link>
 
