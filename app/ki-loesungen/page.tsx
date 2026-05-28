@@ -1,11 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { MessageSquare, Phone, Cog, BookOpen, ArrowRight } from "lucide-react";
+import { siteConfig } from "@/lib/config";
+import {
+  getServiceJsonLd,
+  getBreadcrumbJsonLd,
+} from "@/lib/structured-data";
+import ServiceCrossLinks from "@/components/ui/ServiceCrossLinks";
+
+const pageTitle = "KI-Lösungen & KI-Beratung für den Mittelstand";
+const pageDescription =
+  "ITEBV setzt KI pragmatisch ein: Chatbots, Voice Agents, Prozessautomatisierung und RAG-Wissensdatenbanken. KI als Werkzeug, nicht als Spielerei. KI-Beratung aus Berlin, deutschlandweit.";
+const slug = "/ki-loesungen";
 
 export const metadata: Metadata = {
-  title: "KI-Lösungen für den Geschäftsalltag",
-  description:
-    "ITEBV setzt KI pragmatisch ein: Chatbots, Voice Agents, Prozessautomatisierung und Wissensdatenbanken. KI als Werkzeug, nicht als Spielerei.",
+  title: pageTitle,
+  description: pageDescription,
+  alternates: { canonical: slug },
+  openGraph: {
+    title: pageTitle,
+    description: pageDescription,
+    url: slug,
+  },
 };
 
 const offerings = [
@@ -36,11 +52,38 @@ const offerings = [
 ];
 
 export default function KiLoesungenPage() {
+  const serviceSchema = getServiceJsonLd({
+    name: "KI-Lösungen für den Geschäftsalltag",
+    description: pageDescription,
+    slug,
+    serviceType: "AI Consulting",
+  });
+  const breadcrumbSchema = getBreadcrumbJsonLd([
+    { name: "Start", url: siteConfig.siteUrl },
+    { name: "KI-Lösungen", url: `${siteConfig.siteUrl}${slug}` },
+  ]);
+
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+
       {/* Hero */}
       <section className="section-padding bg-bg-alt">
         <div className="container-narrow">
+          <nav aria-label="Breadcrumb" className="text-sm text-text-light mb-6">
+            <Link href="/" className="hover:text-primary">
+              Start
+            </Link>
+            <span className="mx-2">/</span>
+            <span className="text-text">KI-Lösungen</span>
+          </nav>
           <h1 className="text-4xl md:text-5xl font-bold text-text leading-tight mb-6">
             KI ist kein Zukunftsprojekt. Es ist ein Werkzeug, das heute
             funktioniert.
@@ -48,8 +91,8 @@ export default function KiLoesungenPage() {
           <p className="text-lg text-text-light">
             Sie müssen kein Technologiekonzern sein, um von KI zu profitieren.
             Auch in einem mittelständischen Unternehmen gibt es Aufgaben, die
-            eine KI schneller, zuverlässiger und günstiger erledigen kann als ein
-            Mensch. Ohne dass jemand seinen Job verliert.
+            eine KI schneller, zuverlässiger und günstiger erledigen kann als
+            ein Mensch. Ohne dass jemand seinen Job verliert.
           </p>
         </div>
       </section>
@@ -90,9 +133,9 @@ export default function KiLoesungenPage() {
           </h2>
           <p className="text-lg text-text-light">
             Wir starten klein. Kein Riesenprojekt, sondern ein konkreter
-            Anwendungsfall, der schnell Ergebnisse zeigt. Wenn das funktioniert,
-            erweitern wir. So minimieren wir Risiko und Sie sehen früh, was KI in
-            Ihrem Unternehmen leisten kann.
+            Anwendungsfall, der schnell Ergebnisse zeigt. Wenn das
+            funktioniert, erweitern wir. So minimieren wir Risiko und Sie
+            sehen früh, was KI in Ihrem Unternehmen leisten kann.
           </p>
         </div>
       </section>
@@ -104,12 +147,14 @@ export default function KiLoesungenPage() {
             Was das kostet
           </h2>
           <p className="text-lg text-text-light">
-            KI-Projekte starten typischerweise ab 5.000€. Die genauen Kosten
-            hängen vom Umfang ab. Im Erstgespräch klären wir, was für Ihren Fall
-            sinnvoll und realistisch ist.
+            KI-Projekte starten typischerweise ab 5.000 €. Die genauen Kosten
+            hängen vom Umfang ab. Im Erstgespräch klären wir, was für Ihren
+            Fall sinnvoll und realistisch ist.
           </p>
         </div>
       </section>
+
+      <ServiceCrossLinks currentHref={slug} />
 
       {/* CTA */}
       <section className="section-padding bg-primary text-white">
@@ -118,14 +163,14 @@ export default function KiLoesungenPage() {
             Bereit für KI in Ihrem Unternehmen?
           </h2>
           <p className="text-white/90 mb-8 max-w-xl mx-auto">
-            Schreiben Sie mir – ich melde mich und wir klären, welche
+            Schreiben Sie mir – ich melde mich, und wir klären, welche
             KI-Lösung zu Ihren Anforderungen passt.
           </p>
           <Link
             href="/#kontakt"
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary font-medium rounded-lg hover:bg-bg-alt transition-colors"
           >
-            Kontakt aufnehmen
+            {siteConfig.primaryCtaLabel}
             <ArrowRight className="size-5" />
           </Link>
         </div>

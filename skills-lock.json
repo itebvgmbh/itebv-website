@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "skills": {
+    "seo-audit": {
+      "source": "kostja94/marketing-skills",
+      "sourceType": "github",
+      "skillPath": "skills/strategies/structure/seo-audit/SKILL.md",
+      "computedHash": "60ea7a4fd8d505dbf6672cfd5c7490545fb0996b5ec896959c9d4c23e722e55d"
+    },
+    "seo-strategy": {
+      "source": "kostja94/marketing-skills",
+      "sourceType": "github",
+      "skillPath": "skills/strategies/structure/seo/SKILL.md",
+      "computedHash": "14e44514a9bbdd2efb080b39d6f3b2ea1c35107e2c7570abcda3afd5f5c8e4e4"
+    }
+  }
+}

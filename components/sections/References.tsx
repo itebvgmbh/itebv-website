@@ -1,4 +1,5 @@
 import { siteConfig } from "@/lib/config";
+import Image from "next/image";
 import { ExternalLink } from "lucide-react";
 
 interface Reference {
@@ -8,6 +9,7 @@ interface Reference {
   tag: string;
   href: string | null;
   external: boolean;
+  logo?: { src: string; alt: string };
 }
 
 const references: Reference[] = [
@@ -19,11 +21,13 @@ const references: Reference[] = [
     tag: "KI-Chatbot",
     href: siteConfig.speinshartLink,
     external: true,
+    logo: { src: "/images/speinshart.svg", alt: "Speinshart Scientific Center" },
   },
   {
     title: "Zahnarztpraxis in Berlin",
     subtitle: "Digitales Terminbuch mit Voice Agent",
-    description: `${siteConfig.zahnarztPraxis} – Eine Berliner Zahnarztpraxis wollte die telefonische Terminvergabe automatisieren. Die Lösung: Ein Voice Agent, der Anrufe entgegennimmt, verfügbare Termine prüft und direkt einträgt. Keine Warteschleife, keine verpassten Anrufe.`,
+    description:
+      "Eine Berliner Zahnarztpraxis (Name auf Anfrage) wollte die telefonische Terminvergabe automatisieren. Die Lösung: Ein Voice Agent, der Anrufe entgegennimmt, verfügbare Termine prüft und direkt einträgt. Keine Warteschleife, keine verpassten Anrufe.",
     tag: "Voice Agent",
     href: null,
     external: false,
@@ -36,6 +40,7 @@ const references: Reference[] = [
     tag: "Digitalisierung",
     href: null,
     external: false,
+    logo: { src: "/images/rissel.png", alt: "Rolf Rissel Objekteinrichtungen" },
   },
   {
     title: "10+ Jahre IT-Beratung für die Industrie",
@@ -63,9 +68,31 @@ export default function References() {
               className="group border border-border rounded-xl overflow-hidden bg-white hover:border-primary/30 transition-colors"
             >
               <div className="p-6 md:p-8">
-                <span className="inline-block px-3 py-1 text-xs font-medium text-primary bg-accent rounded-full mb-4">
-                  {ref.tag}
-                </span>
+                <div className="flex items-start justify-between gap-4 mb-4">
+                  <span className="inline-block px-3 py-1 text-xs font-medium text-primary bg-accent rounded-full">
+                    {ref.tag}
+                  </span>
+                  {ref.logo && (
+                    <div className="relative h-8 w-24 flex-shrink-0 grayscale opacity-60">
+                      {ref.logo.src.endsWith(".svg") ? (
+                        /* eslint-disable-next-line @next/next/no-img-element */
+                        <img
+                          src={ref.logo.src}
+                          alt={ref.logo.alt}
+                          className="h-full w-full object-contain object-right"
+                        />
+                      ) : (
+                        <Image
+                          src={ref.logo.src}
+                          alt={ref.logo.alt}
+                          fill
+                          className="object-contain object-right"
+                          sizes="96px"
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>
                 <h3 className="text-xl font-semibold text-text mb-2">
                   {ref.title}
                 </h3>

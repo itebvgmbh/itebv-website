@@ -27,16 +27,30 @@ export const siteConfig = {
 
   // Links
   speinshartLink: "https://speinshart.ai",
-
-  // Referenz-Platzhalter
-  zahnarztPraxis: "[PRAXISNAME / BEZIRK EINFÜGEN]",
+  // Optional: Social-Profile fuer JSON-LD sameAs. Leere Strings werden ignoriert.
+  linkedInUrl: "", // z.B. "https://www.linkedin.com/in/stefan-tittmann/"
+  xingUrl: "",
+  googleBusinessUrl: "",
 
   // Bilder
   stefanFoto: "/images/stefan.jpg", // Foto hier ablegen
+  ogImage: "/images/og-image.jpg", // 1200x630 Open Graph Bild hier ablegen
 
   // SEO
   siteUrl: "https://itebv.de",
-  siteTitle: "ITEBV GmbH – IT-Beratung, Digitalisierung & KI-Lösungen",
+  siteTitle:
+    "ITEBV – KI- und IT-Beratung für den Mittelstand | Berlin & deutschlandweit",
   siteDescription:
-    "IT-Beratung, Digitalisierung und KI-Lösungen für den Mittelstand. Von der Analyse bis zum laufenden System – alles aus einer Hand.",
+    "Pragmatische KI- und IT-Beratung, Digitalisierung und individuelle Software für den Mittelstand. Persönliche Beratung aus Berlin, deutschlandweit. Ein Ansprechpartner von der Analyse bis zum laufenden System.",
+
+  // Conversion / CTA
+  primaryCtaLabel: "Kostenloses 20-Min Gespräch",
+  primaryCtaShort: "Termin buchen",
+
+  // Social Proof
+  yearsOfExperience: "10+",
+  formerClients: "Linde, PSI, KROENERT",
+
+  // Servicegebiet (fuer LocalBusiness Schema)
+  serviceAreas: ["Berlin", "Brandenburg", "Deutschland", "DACH"],
 };

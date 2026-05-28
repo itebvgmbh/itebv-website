@@ -10,7 +10,9 @@ export default function Contact() {
     email: "",
     phone: "",
     message: "",
+    website: "", // Honeypot – muss leer bleiben
   });
+  const [consent, setConsent] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -22,6 +24,16 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!consent) {
+      setStatus("error");
+      setErrorMsg("Bitte stimmen Sie der Verarbeitung Ihrer Daten zu.");
+      return;
+    }
+    if (formData.website) {
+      // Honeypot ausgefuellt – stille Ablehnung
+      setStatus("success");
+      return;
+    }
     setStatus("sending");
     setErrorMsg("");
 
@@ -29,7 +41,12 @@ export default function Contact() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          message: formData.message,
+        }),
       });
 
       if (!res.ok) {
@@ -38,7 +55,8 @@ export default function Contact() {
       }
 
       setStatus("success");
-      setFormData({ name: "", email: "", phone: "", message: "" });
+      setFormData({ name: "", email: "", phone: "", message: "", website: "" });
+      setConsent(false);
     } catch (err) {
       setStatus("error");
       setErrorMsg(
@@ -56,13 +74,27 @@ export default function Contact() {
           {/* Left: Text + Contact Info */}
           <div>
             <h2 className="text-3xl md:text-4xl font-bold text-text leading-tight mb-6">
-              Lassen Sie uns herausfinden, ob ich Ihnen helfen kann.
+              Kostenloses 20-Min Erstgespräch
             </h2>
-            <p className="text-lg text-text-light mb-10">
-              Ein kurzes Gespräch, 20 Minuten, kostenlos, unverbindlich. Sie
-              erzählen mir, was Sie beschäftigt. Ich sage Ihnen ehrlich, ob und
-              wie ich helfen kann.
+            <p className="text-lg text-text-light mb-6">
+              Sie erzählen mir, was Sie beschäftigt. Ich sage Ihnen ehrlich, ob
+              und wie ich helfen kann. Kein Verkaufsgespräch, keine
+              Verpflichtung.
             </p>
+            <ul className="text-sm text-text-light space-y-2 mb-10">
+              <li className="flex items-start gap-2">
+                <CheckCircle size={16} className="text-primary shrink-0 mt-0.5" />
+                <span>Antwort in der Regel innerhalb eines Werktags</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle size={16} className="text-primary shrink-0 mt-0.5" />
+                <span>Per Video-Call, Telefon oder in Berlin vor Ort</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <CheckCircle size={16} className="text-primary shrink-0 mt-0.5" />
+                <span>Ehrliche Einschätzung – auch wenn ich nicht der Richtige bin</span>
+              </li>
+            </ul>
 
             {/* Direct Contact */}
             <div className="space-y-4 mb-10">
@@ -132,7 +164,7 @@ export default function Contact() {
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="space-y-5 p-8 bg-bg-alt rounded-2xl border border-border"
+                className="relative space-y-5 p-8 bg-bg-alt rounded-2xl border border-border"
               >
                 <div>
                   <label
@@ -210,13 +242,57 @@ export default function Contact() {
                   />
                 </div>
 
+                {/* Honeypot – fuer Bots, vor Menschen versteckt */}
+                <div
+                  aria-hidden="true"
+                  className="absolute -left-[9999px] w-px h-px overflow-hidden"
+                >
+                  <label htmlFor="website">Website</label>
+                  <input
+                    type="text"
+                    id="website"
+                    name="website"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    value={formData.website}
+                    onChange={handleChange}
+                  />
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <input
+                    type="checkbox"
+                    id="consent"
+                    checked={consent}
+                    onChange={(e) => setConsent(e.target.checked)}
+                    required
+                    className="mt-1 size-4 rounded border-border text-primary focus:ring-primary/30"
+                  />
+                  <label
+                    htmlFor="consent"
+                    className="text-xs text-text-light leading-relaxed"
+                  >
+                    Ich habe die{" "}
+                    <a
+                      href="/datenschutz"
+                      className="underline hover:text-primary"
+                    >
+                      Datenschutzerklärung
+                    </a>{" "}
+                    gelesen und stimme der Verarbeitung meiner Daten zur
+                    Bearbeitung dieser Anfrage zu. Die Einwilligung kann
+                    jederzeit per E-Mail an {siteConfig.email} widerrufen
+                    werden. *
+                  </label>
+                </div>
+
                 {status === "error" && (
                   <p className="text-sm text-red-600">{errorMsg}</p>
                 )}
 
                 <button
                   type="submit"
-                  disabled={status === "sending"}
+                  disabled={status === "sending" || !consent}
                   className="w-full flex items-center justify-center gap-2 px-6 py-3.5 bg-primary text-white font-medium rounded-lg hover:bg-primary-light transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {status === "sending" ? (
@@ -228,14 +304,6 @@ export default function Contact() {
                     </>
                   )}
                 </button>
-
-                <p className="text-xs text-text-light text-center">
-                  Ihre Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage
-                  verwendet.{" "}
-                  <a href="/datenschutz" className="underline hover:text-primary">
-                    Datenschutz
-                  </a>
-                </p>
               </form>
             )}
           </div>

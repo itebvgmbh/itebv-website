@@ -29,13 +29,13 @@ export default function Services() {
   return (
     <section id="leistungen" className="section-padding bg-bg">
       <div className="container-wide">
-        <h2 className="text-2xl md:text-3xl font-bold text-text mb-6">
-          Was ich für Sie tue
+        <h2 className="text-3xl md:text-4xl font-bold text-text mb-4 text-center">
+          Leistungen: IT-Beratung, Software &amp; KI für den Mittelstand
         </h2>
-        <p className="text-lg text-text-light max-w-2xl mb-12">
+        <p className="text-lg text-text-light max-w-2xl mx-auto mb-12 text-center">
           Sie haben Prozesse, die zu viel Zeit kosten. Systeme, die nicht
-          miteinander reden. Aufgaben, die Ihre Mitarbeiter von der eigentlichen
-          Arbeit abhalten. Ich helfe Ihnen, das zu ändern.
+          miteinander reden. Aufgaben, die Ihre Mitarbeiter von der
+          eigentlichen Arbeit abhalten. Ich helfe Ihnen, das zu ändern.
         </p>
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((service) => {
