@@ -1,17 +1,17 @@
-import { Zap, Rocket, MessageCircle, Handshake } from "lucide-react";
+import { Lightbulb, Target, MessageCircle, Handshake } from "lucide-react";
 import SectionHeader from "@/components/ui/SectionHeader";
 import Reveal from "@/components/ui/Reveal";
 
 const items = [
   {
-    icon: Zap,
-    title: "80/20 statt Overengineering.",
-    text: "Ich arbeite nach dem Pareto-Prinzip: die 20% Aufwand finden, die 80% des Ergebnisses bringen. Keine aufgeblähten Systeme, keine Features, die niemand braucht. Sie bekommen genau das, was den größten Hebel hat – schnell und planbar.",
+    icon: Lightbulb,
+    title: "Ich verstehe Ihr Geschäft, nicht nur die Technik.",
+    text: "Über 10 Jahre IT-Beratung für Industrieunternehmen haben mir gezeigt: Die beste Technologie bringt nichts, wenn sie am tatsächlichen Bedarf vorbeigeht. Ich höre erst zu, dann plane ich, dann setze ich um.",
   },
   {
-    icon: Rocket,
-    title: "Heute stark, morgen noch stärker.",
-    text: "Jede Lösung ist so gebaut, dass sie mit der rasanten Entwicklung von KI mitwächst. Modelle sind austauschbar, Schnittstellen offen, Erweiterungen eingeplant. Sie legen jetzt die Grundlage, um KI heute sinnvoll einzusetzen – und morgen noch viel mehr daraus zu machen.",
+    icon: Target,
+    title: "Ergebnisse statt Konzeptpapiere.",
+    text: "Viele Berater liefern eine Analyse und verschwinden. Viele Entwickler setzen um, ohne den Geschäftsprozess zu verstehen. Ich mache beides – ein Ansprechpartner von der Analyse bis zum laufenden System.",
   },
   {
     icon: MessageCircle,

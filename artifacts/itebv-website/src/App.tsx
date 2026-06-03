@@ -21,13 +21,7 @@ function ScrollToHashOnNav() {
       const id = hash.slice(1);
       setTimeout(() => {
         const el = document.getElementById(id);
-        if (!el) return;
-        const headerOffset = window.matchMedia("(min-width: 768px)").matches
-          ? 80
-          : 64;
-        const top =
-          el.getBoundingClientRect().top + window.scrollY - headerOffset;
-        window.scrollTo({ top, behavior: "smooth" });
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
       }, 50);
     } else {
       window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });

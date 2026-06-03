@@ -4,14 +4,14 @@ import Reveal from "@/components/ui/Reveal";
 
 const trustItems = [
   { icon: Award, label: `${siteConfig.yearsOfExperience} Jahre IT-Beratung` },
-  { icon: ShieldCheck, label: "Erfahrung aus DAX & Industrie" },
+  { icon: ShieldCheck, label: `Ex-${siteConfig.formerClients}` },
   { icon: MapPin, label: `Sitz in ${siteConfig.city}` },
   { icon: Clock, label: "Erstgespräch in 24h" },
 ];
 
 const heroBullets = [
-  "Alles aus einer Hand – von der Analyse bis zum laufenden System",
-  "Ehrlich, direkt, ergebnisorientiert",
+  "Ein Ansprechpartner – von der Analyse bis zum laufenden System",
+  "Pragmatisch, ehrlich, ergebnisorientiert",
   "Festpreise statt versteckter Stundenzettel",
 ];
 
@@ -27,7 +27,7 @@ export default function Hero() {
           <Reveal className="max-w-xl">
             <p className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.14em] text-primary bg-accent rounded-full px-3.5 py-1.5 mb-7 ring-1 ring-inset ring-primary/15">
               <span className="size-1.5 rounded-full bg-primary" />
-              KI- &amp; IT-Beratung für Mittelstand &amp; KMU
+              KI- &amp; IT-Beratung für den Mittelstand
             </p>
             <h1 className="heading-display mb-6">
               Software und KI, die Ihr Unternehmen{" "}
@@ -35,7 +35,8 @@ export default function Hero() {
             </h1>
             <p className="lead mb-8">
               Pragmatische IT-Beratung, Digitalisierung und individuelle Software
-              für den deutschen Mittelstand und KMU. Aus Berlin, für Macher.
+              für den deutschen Mittelstand. Ein Ansprechpartner aus Berlin –
+              von der Analyse bis zum laufenden System.
             </p>
 
             <ul className="space-y-2.5 mb-9">
@@ -48,7 +49,7 @@ export default function Hero() {
             </ul>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 mb-10">
-              <a href="/#kontakt-formular" className="btn-primary">
+              <a href="/#kontakt" className="btn-primary">
                 {siteConfig.primaryCtaLabel}
                 <ArrowRight className="size-5" />
               </a>

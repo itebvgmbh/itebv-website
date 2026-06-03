@@ -136,7 +136,6 @@ export default function Contact() {
           </Reveal>
 
           <Reveal delay={120}>
-            <div id="kontakt-formular" className="scroll-mt-24 md:scroll-mt-28">
             {status === "success" ? (
               <div className="flex flex-col items-center justify-center h-full text-center p-10 card-base">
                 <CheckCircle size={48} className="text-primary mb-4" />
@@ -279,7 +278,6 @@ export default function Contact() {
                 </button>
               </form>
             )}
-            </div>
           </Reveal>
         </div>
       </div>
