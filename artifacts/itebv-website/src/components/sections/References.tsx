@@ -1,7 +1,7 @@
 import { siteConfig } from "@/lib/config";
-import { ExternalLink } from "lucide-react";
-import SectionHeader from "@/components/ui/SectionHeader";
+import { ArrowUpRight } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
+import SectionHeading from "@/components/ui/SectionHeading";
 
 interface Reference {
   title: string;
@@ -18,7 +18,7 @@ const references: Reference[] = [
     title: "Speinshart Scientific Center for AI and SuperTech",
     subtitle: "Chatbot mit KI-Wissensdatenbank für ein Wissenschaftszentrum",
     description:
-      'Das Speinshart Scientific Center im historischen Kloster Speinshart brauchte eine Möglichkeit, Besuchern rund um die Uhr Informationen zu Veranstaltungen, Forschungsprojekten und Kooperationsmöglichkeiten zugänglich zu machen. Ich habe den Chatbot "N3X-B" mit einem RAG-System als Wissensdatenbank entwickelt, der genau das leistet.',
+      'Das Speinshart Scientific Center im historischen Kloster Speinshart brauchte eine Möglichkeit, Besuchern rund um die Uhr Informationen zugänglich zu machen. Ich habe den Chatbot "N3X-B" mit einem RAG-System als Wissensdatenbank entwickelt, der genau das leistet.',
     tag: "KI-Chatbot",
     href: siteConfig.speinshartLink,
     external: true,
@@ -37,7 +37,7 @@ const references: Reference[] = [
     title: "Rolf Rissel GmbH",
     subtitle: "Digitalisierungskonzept für einen Apotheken- und Praxiseinrichter",
     description:
-      "Die Rolf Rissel GmbH, Handwerksbetrieb und Fachhandel für Apotheken- und Praxiseinrichtung, stand vor der Frage, wie die gesamte Wertschöpfungskette digitalisiert werden kann: von der Lead-Erfassung über die Planung bis zur Fertigung. Ich habe die bestehenden Prozesse analysiert und eine Roadmap für eine maßgeschneiderte Unternehmenssoftware mit KI-Readiness erstellt.",
+      "Die Rolf Rissel GmbH, Fachhandel für Apotheken- und Praxiseinrichtung, stand vor der Frage, wie die gesamte Wertschöpfungskette digitalisiert werden kann: von der Lead-Erfassung über die Planung bis zur Fertigung. Ich habe die Prozesse analysiert und eine Roadmap für eine maßgeschneiderte Software mit KI-Readiness erstellt.",
     tag: "Digitalisierung",
     href: null,
     external: false,
@@ -47,7 +47,7 @@ const references: Reference[] = [
     title: "10+ Jahre IT-Beratung für die Industrie",
     subtitle: null,
     description:
-      "Bevor ich mich auf KI-Lösungen und individuelle Software fokussiert habe, habe ich über zehn Jahre lang Industrieunternehmen in der IT beraten, unter anderem Linde im Bereich ERP und Prozessoptimierung. Diese Erfahrung ist das Fundament, auf dem alles andere aufbaut: Ich verstehe, wie Unternehmen arbeiten, wo die typischen Probleme liegen und was eine Lösung in der Praxis aushalten muss.",
+      "Bevor ich mich auf KI-Lösungen und individuelle Software fokussiert habe, habe ich über zehn Jahre lang Industrieunternehmen in der IT beraten, u. a. Linde im Bereich ERP und Prozessoptimierung. Diese Erfahrung ist das Fundament, auf dem alles andere aufbaut.",
     tag: "IT-Beratung",
     href: null,
     external: false,
@@ -56,56 +56,73 @@ const references: Reference[] = [
 
 export default function References() {
   return (
-    <section id="referenzen" className="section-padding bg-bg">
-      <div className="container-wide">
-        <SectionHeader
+    <section id="referenzen" className="section-padding bg-bg border-t border-line">
+      <div className="container-editorial">
+        <SectionHeading
           eyebrow="Referenzen"
           title="Ausgewählte Projekte"
-          lead="Konkrete Beispiele, was im Mittelstand mit pragmatischer IT, Software und KI möglich ist."
+          intro="Ein Ausschnitt aus aktuellen und vergangenen Mandaten – von der KI-Lösung bis zur Digitalisierungsstrategie."
         />
 
-        <div className="grid md:grid-cols-2 gap-6 lg:gap-7">
-          {references.map((ref, index) => (
-            <Reveal key={index} delay={index * 70}>
-              <article className="card-base card-hover group h-full flex flex-col p-7 md:p-8">
-                <div className="flex items-start justify-between gap-4 mb-5">
-                  <span className="inline-flex items-center px-3 py-1 text-xs font-semibold text-primary bg-accent rounded-full ring-1 ring-inset ring-primary/15">
+        <div className="mt-14 md:mt-20 grid grid-cols-1 gap-px overflow-hidden border border-line bg-line md:grid-cols-2">
+          {references.map((ref, index) => {
+            const isLink = Boolean(ref.href && ref.external);
+            const cardClass =
+              "group flex h-full flex-col bg-bg p-8 md:p-10 transition-colors duration-300 hover:bg-bg-alt";
+            const inner = (
+              <>
+                <div className="flex items-start justify-between gap-4">
+                  <span className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-primary">
                     {ref.tag}
                   </span>
                   {ref.logo && (
-                    <div className="relative h-7 w-24 flex-shrink-0 grayscale opacity-60">
-                      <img
-                        src={ref.logo.src}
-                        alt={ref.logo.alt}
-                        className="h-full w-full object-contain object-right"
-                        loading="lazy"
-                      />
-                    </div>
+                    <img
+                      src={ref.logo.src}
+                      alt={ref.logo.alt}
+                      className="h-7 w-24 shrink-0 object-contain object-right grayscale opacity-55"
+                      loading="lazy"
+                    />
                   )}
                 </div>
-                <h3 className="text-lg md:text-xl font-semibold text-text-strong mb-2 leading-snug">
+
+                <h3 className="mt-6 font-display text-xl md:text-2xl font-semibold leading-snug text-ink transition-colors duration-300 group-hover:text-primary">
                   {ref.title}
                 </h3>
                 {ref.subtitle && (
-                  <p className="text-primary font-medium text-sm mb-3">{ref.subtitle}</p>
+                  <p className="mt-2 text-sm font-medium text-primary">
+                    {ref.subtitle}
+                  </p>
                 )}
-                <p className="text-text-light text-sm leading-relaxed flex-1">
+                <p className="mt-4 text-sm leading-relaxed text-text-light">
                   {ref.description}
                 </p>
-                {ref.href && ref.external && (
+
+                {isLink && (
+                  <span className="link-arrow mt-6 text-primary">
+                    Projekt ansehen
+                    <ArrowUpRight size={16} />
+                  </span>
+                )}
+              </>
+            );
+
+            return (
+              <Reveal as="div" key={index} delay={(index % 2) * 90}>
+                {isLink ? (
                   <a
-                    href={ref.href}
+                    href={ref.href as string}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 mt-5 text-primary text-sm font-semibold hover:gap-2.5 transition-all"
+                    className={cardClass}
                   >
-                    Projekt ansehen
-                    <ExternalLink size={14} />
+                    {inner}
                   </a>
+                ) : (
+                  <div className={cardClass}>{inner}</div>
                 )}
-              </article>
-            </Reveal>
-          ))}
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

@@ -1,6 +1,6 @@
 import { Link } from "wouter";
 import { siteConfig } from "@/lib/config";
-import { Mail, Phone, MapPin, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
 
 const serviceLinks = [
   { href: "/analyse", label: "Analyse & Strategie" },
@@ -12,40 +12,56 @@ const siteLinks = [
   { href: "/#referenzen", label: "Referenzen" },
   { href: "/#faq", label: "FAQ" },
   { href: "/#ueber-mich", label: "Über mich" },
-];
-
-const legalLinks = [
-  { href: "/impressum", label: "Impressum" },
-  { href: "/datenschutz", label: "Datenschutz" },
+  { href: "/#kontakt", label: "Kontakt" },
 ];
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-bg-deep text-white/80">
-      <div className="container-wide py-16 md:py-20">
-        <div className="grid grid-cols-2 md:grid-cols-12 gap-10 md:gap-8">
-          <div className="col-span-2 md:col-span-4">
-            <img
-              src="/images/itebv-logo.png"
-              alt="ITEBV GmbH"
-              className="h-7 w-auto mb-5 brightness-0 invert"
+    <footer className="bg-ink text-white">
+      {/* Closing-CTA */}
+      <div className="container-editorial border-b border-white/10 py-16 md:py-24">
+        <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
+          <h2 className="display max-w-2xl text-3xl md:text-4xl lg:text-[2.9rem] text-white">
+            Lassen Sie uns über Ihr Projekt sprechen.
+          </h2>
+          <a
+            href="/#kontakt"
+            className="group inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-7 py-4 font-medium text-ink transition-colors duration-300 hover:bg-primary hover:text-white"
+          >
+            {siteConfig.primaryCtaLabel}
+            <ArrowUpRight
+              size={18}
+              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
             />
-            <p className="text-sm leading-relaxed text-white/65 max-w-xs">
-              KI- und IT-Beratung, Digitalisierung und individuelle Software
-              für den Mittelstand. Sitz in Berlin, deutschlandweit tätig.
+          </a>
+        </div>
+      </div>
+
+      <div className="container-editorial py-14 md:py-16">
+        <div className="grid grid-cols-2 gap-10 md:grid-cols-4 md:gap-12">
+          <div className="col-span-2 md:col-span-1">
+            <span className="font-display text-2xl font-semibold tracking-tight text-white">
+              ITEBV
+            </span>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/55">
+              KI- und IT-Beratung, Digitalisierung und individuelle Software für
+              den Mittelstand. Sitz in Berlin, deutschlandweit tätig.
             </p>
           </div>
 
-          <div className="md:col-span-2">
-            <h3 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">
+          <div>
+            <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-white/40">
               Leistungen
             </h3>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="mt-4 space-y-2.5 text-sm text-white/70">
               {serviceLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-white/65 hover:text-white transition-colors">
+                  <Link
+                    href={link.href}
+                    className="link-underline transition-colors hover:text-white"
+                  >
                     {link.label}
                   </Link>
                 </li>
@@ -53,57 +69,66 @@ export default function Footer() {
             </ul>
           </div>
 
-          <div className="md:col-span-2">
-            <h3 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">
-              Unternehmen
+          <div>
+            <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-white/40">
+              Seite
             </h3>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="mt-4 space-y-2.5 text-sm text-white/70">
               {siteLinks.map((link) => (
                 <li key={link.href}>
-                  <a href={link.href} className="text-white/65 hover:text-white transition-colors">
+                  <a
+                    href={link.href}
+                    className="link-underline transition-colors hover:text-white"
+                  >
                     {link.label}
                   </a>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/impressum"
+                  className="link-underline transition-colors hover:text-white"
+                >
+                  Impressum
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/datenschutz"
+                  className="link-underline transition-colors hover:text-white"
+                >
+                  Datenschutz
+                </Link>
+              </li>
             </ul>
           </div>
 
-          <div className="col-span-2 md:col-span-4">
-            <h3 className="text-sm font-semibold text-white mb-4 uppercase tracking-wider">
-              Kostenloses Erstgespräch
+          <div className="col-span-2 md:col-span-1">
+            <h3 className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-white/40">
+              Kontakt
             </h3>
-            <p className="text-sm text-white/65 mb-5 leading-relaxed">
-              20&nbsp;Minuten, unverbindlich. Sie erzählen, ich höre zu.
-            </p>
-            <a
-              href="/#kontakt"
-              className="inline-flex items-center gap-2 px-5 py-3 bg-primary text-white text-sm font-semibold rounded-xl hover:bg-primary-light transition-colors mb-7"
-            >
-              Termin anfragen
-              <ArrowRight size={16} />
-            </a>
-            <ul className="space-y-3 text-sm">
+            <ul className="mt-4 space-y-3 text-sm text-white/70">
               <li className="flex items-center gap-2.5">
-                <Mail size={16} className="shrink-0 text-white/50" />
+                <Mail size={15} className="shrink-0 text-white/40" />
                 <a
                   href={`mailto:${siteConfig.email}`}
-                  className="text-white/75 hover:text-white transition-colors break-all"
+                  className="break-all transition-colors hover:text-white"
                 >
                   {siteConfig.email}
                 </a>
               </li>
               <li className="flex items-center gap-2.5">
-                <Phone size={16} className="shrink-0 text-white/50" />
+                <Phone size={15} className="shrink-0 text-white/40" />
                 <a
                   href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
-                  className="text-white/75 hover:text-white transition-colors"
+                  className="transition-colors hover:text-white"
                 >
                   {siteConfig.phoneDisplay}
                 </a>
               </li>
               <li className="flex items-start gap-2.5">
-                <MapPin size={16} className="shrink-0 mt-0.5 text-white/50" />
-                <address className="not-italic text-white/75">
+                <MapPin size={15} className="mt-0.5 shrink-0 text-white/40" />
+                <address className="not-italic">
                   {siteConfig.street}
                   <br />
                   {siteConfig.zip} {siteConfig.city}
@@ -113,19 +138,12 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/50 text-center md:text-left">
-            &copy; {currentYear} {siteConfig.companyName}. Alle Rechte vorbehalten.
-          </p>
-          <ul className="flex items-center gap-6 text-xs">
-            {legalLinks.map((link) => (
-              <li key={link.href}>
-                <Link href={link.href} className="text-white/60 hover:text-white transition-colors">
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className="mt-14 flex flex-col gap-2 border-t border-white/10 pt-7 text-xs text-white/40 sm:flex-row sm:items-center sm:justify-between">
+          <span>
+            &copy; {currentYear} {siteConfig.companyName}. Alle Rechte
+            vorbehalten.
+          </span>
+          <span>{siteConfig.registry} · {siteConfig.registryNumber}</span>
         </div>
       </div>
     </footer>

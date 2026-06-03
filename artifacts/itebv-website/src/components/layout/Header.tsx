@@ -1,76 +1,68 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "wouter";
-import { Menu, X } from "lucide-react";
+import { Link } from "wouter";
+import { Menu, X, ArrowUpRight } from "lucide-react";
 import { siteConfig } from "@/lib/config";
 
 const navLinks = [
   { href: "/#leistungen", label: "Leistungen" },
   { href: "/#referenzen", label: "Referenzen" },
-  { href: "/#faq", label: "FAQ" },
   { href: "/#ueber-mich", label: "Über mich" },
-  { href: "/#kontakt", label: "Kontakt" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [location] = useLocation();
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8);
+    const onScroll = () => setScrolled(window.scrollY > 12);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    setMobileOpen(false);
-  }, [location]);
-
-  const isHome = location === "/";
-
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-[background-color,border-color,box-shadow] duration-300 ${
         scrolled
-          ? "bg-white/85 backdrop-blur-md border-b border-border shadow-[0_1px_0_0_rgba(15,23,42,0.04)]"
-          : "bg-white/70 backdrop-blur-md border-b border-transparent"
+          ? "bg-white/65 backdrop-blur-xl backdrop-saturate-150 border-b border-white/50 shadow-[0_8px_30px_-18px_rgba(11,16,22,0.25)]"
+          : "bg-transparent border-b border-transparent"
       }`}
     >
-      <div className="container-wide flex items-center justify-between h-16 md:h-20">
-        <Link href="/" className="flex items-center group" aria-label="Startseite">
+      <div className="container-editorial flex items-center justify-between h-16 md:h-20">
+        <Link href="/" className="flex items-center shrink-0" aria-label="ITEBV – Startseite">
           <img
             src="/images/itebv-logo.png"
-            alt="ITEBV GmbH – KI- und IT-Beratung"
-            className="h-7 md:h-8 w-auto transition-transform group-hover:scale-[1.02]"
+            alt="ITEBV – KI- und IT-Beratung"
+            className="h-6 md:h-7 w-auto"
           />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => {
-            const active = isHome && link.href.startsWith("/#");
-            return (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`relative px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                  active
-                    ? "text-text-strong hover:text-primary"
-                    : "text-text-light hover:text-primary"
-                }`}
-              >
-                {link.label}
-              </a>
-            );
-          })}
-          <a href="/#kontakt" className="ml-3 btn-primary px-5 py-2.5 text-sm rounded-lg">
-            {siteConfig.primaryCtaLabel}
+        <nav className="hidden md:flex items-center gap-9">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="link-underline text-[0.95rem] text-ink/70 hover:text-ink transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+          <a
+            href="/#kontakt"
+            className="group inline-flex items-center gap-2 pl-5 pr-4 py-2.5 rounded-full bg-ink text-white text-sm font-medium hover:bg-primary transition-colors duration-300"
+          >
+            {siteConfig.primaryCtaShort}
+            <ArrowUpRight
+              size={16}
+              className="transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
           </a>
         </nav>
 
         <button
           onClick={() => setMobileOpen(!mobileOpen)}
-          className="md:hidden p-2 -mr-2 text-text hover:text-primary transition-colors rounded-lg"
+          className="md:hidden -mr-2 p-2 text-ink"
           aria-label={mobileOpen ? "Menü schließen" : "Menü öffnen"}
           aria-expanded={mobileOpen}
         >
@@ -79,14 +71,14 @@ export default function Header() {
       </div>
 
       {mobileOpen && (
-        <nav className="md:hidden border-t border-border bg-white">
-          <div className="container-wide py-5 flex flex-col gap-1">
+        <nav className="md:hidden border-t border-line bg-paper">
+          <div className="container-editorial py-5 flex flex-col">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileOpen(false)}
-                className="text-base font-medium text-text px-2 py-2.5 rounded-lg hover:bg-bg-alt hover:text-primary transition-colors"
+                className="py-3 text-lg font-medium text-ink border-b border-line/70 last:border-0"
               >
                 {link.label}
               </a>
@@ -94,9 +86,10 @@ export default function Header() {
             <a
               href="/#kontakt"
               onClick={() => setMobileOpen(false)}
-              className="btn-primary mt-3 px-5 py-3 text-sm"
+              className="mt-5 inline-flex items-center justify-center gap-2 px-5 py-3.5 rounded-full bg-ink text-white text-base font-medium"
             >
               {siteConfig.primaryCtaLabel}
+              <ArrowUpRight size={18} />
             </a>
           </div>
         </nav>

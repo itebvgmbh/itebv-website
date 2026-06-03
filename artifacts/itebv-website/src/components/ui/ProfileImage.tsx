@@ -10,19 +10,23 @@ export default function ProfileImage({ src, alt }: ProfileImageProps) {
   const [hasError, setHasError] = useState(false);
 
   return (
-    <div className="relative aspect-square max-w-sm mx-auto lg:mx-0 overflow-hidden rounded-xl bg-bg-alt border border-border">
+    <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl border border-line bg-bg-alt">
       {!hasError ? (
         <img
           src={src}
           alt={alt}
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-700 ease-out hover:scale-[1.03]"
           onError={() => setHasError(true)}
         />
       ) : (
         <div className="absolute inset-0 flex items-center justify-center bg-bg-alt">
-          <User size={96} className="text-text-light/40" />
+          <User size={96} className="text-muted/50" />
         </div>
       )}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/10 to-transparent"
+      />
     </div>
   );
 }

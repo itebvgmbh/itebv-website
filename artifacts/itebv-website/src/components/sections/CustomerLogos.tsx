@@ -4,39 +4,37 @@ const customerLogos = [
   { src: "/images/Linde_plc_logo.png", alt: "Linde plc – ERP-Beratung" },
   { src: "/images/psi.png", alt: "PSI Software AG – IT-Beratung" },
   { src: "/images/kroenert.png", alt: "KROENERT – Industrieprojekt" },
-  { src: "/images/014_main.jpg", alt: "Trützschler – Industrieprojekt" },
-  { src: "/images/rissel.png", alt: "Rolf Rissel – Digitalisierungskonzept" },
+  { src: "/images/014_main.jpg", alt: "Industriekunde – Prozessdigitalisierung" },
 ];
 
 export default function CustomerLogos() {
   return (
-    <section className="section-padding-sm bg-bg-alt border-y border-border">
-      <div className="container-wide">
-        <Reveal className="text-center mb-10">
-          <p className="eyebrow mb-3">Vertrauen aus der Industrie</p>
-          <h2 className="text-xl md:text-2xl font-semibold text-text-strong">
-            Aus über 10 Jahren Industrie-IT
-          </h2>
-          <p className="text-text-light text-sm mt-3 max-w-xl mx-auto">
+    <section className="border-y border-line bg-bg">
+      <div className="container-editorial py-12 md:py-16">
+        <Reveal className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16">
+          <p className="max-w-md text-sm leading-relaxed text-text-light">
+            <span className="font-display text-base text-ink">
+              Über 10 Jahre Industrie-IT.
+            </span>{" "}
             Auswahl von Unternehmen, für die ich Beratungs- und
             Digitalisierungsprojekte verantwortet habe.
           </p>
+          <ul className="flex flex-wrap items-center gap-x-10 gap-y-8 sm:gap-x-14">
+            {customerLogos.map((logo) => (
+              <li
+                key={logo.src}
+                className="relative h-9 w-24 md:h-10 md:w-28 grayscale opacity-65 transition-all duration-300 hover:grayscale-0 hover:opacity-100"
+              >
+                <img
+                  src={logo.src}
+                  alt={logo.alt}
+                  className="absolute inset-0 h-full w-full object-contain object-center"
+                  loading="lazy"
+                />
+              </li>
+            ))}
+          </ul>
         </Reveal>
-        <div className="flex flex-wrap justify-center items-center gap-x-12 md:gap-x-16 gap-y-6">
-          {customerLogos.map((logo) => (
-            <div
-              key={logo.src}
-              className="relative h-10 md:h-12 w-28 md:w-36 flex items-center justify-center grayscale hover:grayscale-0 opacity-70 hover:opacity-100 transition-all duration-300"
-            >
-              <img
-                src={logo.src}
-                alt={logo.alt}
-                loading="lazy"
-                className="absolute inset-0 w-full h-full object-contain object-center"
-              />
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );

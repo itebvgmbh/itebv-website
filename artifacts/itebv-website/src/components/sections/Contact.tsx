@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { siteConfig } from "@/lib/config";
-import { Send, Mail, Phone, MapPin, CheckCircle, MessageSquare } from "lucide-react";
-import Reveal from "@/components/ui/Reveal";
+import { Send, Mail, Phone, MapPin, CheckCircle, ArrowRight } from "lucide-react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -12,10 +11,14 @@ export default function Contact() {
     website: "",
   });
   const [consent, setConsent] = useState(false);
-  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">(
+    "idle"
+  );
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
@@ -63,102 +66,100 @@ export default function Contact() {
     }
   };
 
-  const inputClass =
-    "w-full px-4 py-3 bg-white rounded-xl border border-border text-text placeholder:text-text-muted/70 focus:outline-none focus:ring-4 focus:ring-primary/15 focus:border-primary transition-all";
+  const inputClasses =
+    "w-full rounded-lg border border-line bg-bg px-4 py-3 text-ink placeholder:text-muted/70 transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20";
 
   return (
-    <section id="kontakt" className="section-padding bg-bg">
-      <div className="container-wide">
-        <div className="grid md:grid-cols-2 gap-12 lg:gap-16">
-          <Reveal>
-            <p className="eyebrow mb-4">Kontakt</p>
-            <h2 className="heading-h2 mb-5">Kostenloses 20-Min Erstgespräch</h2>
-            <p className="lead mb-6">
+    <section id="kontakt" className="section-padding bg-paper border-t border-line">
+      <div className="container-editorial">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-20">
+          {/* Links: Text + Direktkontakt */}
+          <div>
+            <p className="eyebrow">Kontakt</p>
+            <h2 className="display mt-5 text-3xl md:text-4xl lg:text-[2.9rem] text-ink">
+              Kostenloses 20-Minuten-Erstgespräch
+            </h2>
+            <p className="mt-6 text-lg leading-relaxed text-text-light">
               Sie erzählen mir, was Sie beschäftigt. Ich sage Ihnen ehrlich, ob
               und wie ich helfen kann. Kein Verkaufsgespräch, keine
               Verpflichtung.
             </p>
-            <ul className="text-sm text-text-light space-y-2.5 mb-10">
+
+            <ul className="mt-8 space-y-3">
               {[
                 "Antwort in der Regel innerhalb eines Werktags",
                 "Per Video-Call, Telefon oder in Berlin vor Ort",
                 "Ehrliche Einschätzung – auch wenn ich nicht der Richtige bin",
-              ].map((t) => (
-                <li key={t} className="flex items-start gap-2.5">
-                  <CheckCircle size={16} className="text-primary shrink-0 mt-0.5" />
-                  <span>{t}</span>
+              ].map((point) => (
+                <li
+                  key={point}
+                  className="flex items-start gap-3 text-text-light"
+                >
+                  <CheckCircle
+                    size={18}
+                    className="mt-0.5 shrink-0 text-primary"
+                    strokeWidth={1.5}
+                  />
+                  <span>{point}</span>
                 </li>
               ))}
             </ul>
 
-            <div className="space-y-4 mb-8">
-              <h3 className="text-xs font-semibold text-text-muted uppercase tracking-wider">
-                Oder direkt erreichen
-              </h3>
+            <div className="mt-10 space-y-px border-t border-line">
               <a
                 href={`mailto:${siteConfig.email}`}
-                className="flex items-center gap-3 text-text hover:text-primary transition-colors"
+                className="flex items-center gap-4 border-b border-line py-4 text-ink transition-colors hover:text-primary"
               >
-                <Mail size={18} className="text-primary shrink-0" />
+                <Mail size={18} className="shrink-0 text-primary" strokeWidth={1.5} />
                 <span>{siteConfig.email}</span>
               </a>
               <a
-                href={`tel:${siteConfig.phone}`}
-                className="flex items-center gap-3 text-text hover:text-primary transition-colors"
+                href={`tel:${siteConfig.phone.replace(/\s/g, "")}`}
+                className="flex items-center gap-4 border-b border-line py-4 text-ink transition-colors hover:text-primary"
               >
-                <Phone size={18} className="text-primary shrink-0" />
+                <Phone size={18} className="shrink-0 text-primary" strokeWidth={1.5} />
                 <span>{siteConfig.phoneDisplay}</span>
               </a>
-              <div className="flex items-start gap-3 text-text-light">
-                <MapPin size={18} className="text-primary shrink-0 mt-0.5" />
-                <span>
+              <div className="flex items-start gap-4 border-b border-line py-4 text-text-light">
+                <MapPin size={18} className="mt-0.5 shrink-0 text-primary" strokeWidth={1.5} />
+                <address className="not-italic">
                   {siteConfig.companyName}
                   <br />
-                  {siteConfig.street}
-                  <br />
-                  {siteConfig.zip} {siteConfig.city}
-                </span>
+                  {siteConfig.street}, {siteConfig.zip} {siteConfig.city}
+                </address>
               </div>
             </div>
+          </div>
 
-            <div className="flex items-start gap-3 p-4 bg-accent rounded-xl border border-primary/10">
-              <MessageSquare size={20} className="text-primary shrink-0 mt-0.5" />
-              <div>
-                <p className="text-sm font-semibold text-text-strong">
-                  Schnelle Frage? Probieren Sie den Chatbot.
-                </p>
-                <p className="text-sm text-text-light mt-1">
-                  Unser KI-Assistent unten rechts beantwortet Fragen zu
-                  Leistungen und Ablauf sofort.
-                </p>
-              </div>
-            </div>
-          </Reveal>
-
-          <Reveal delay={120}>
+          {/* Rechts: Formular */}
+          <div>
             {status === "success" ? (
-              <div className="flex flex-col items-center justify-center h-full text-center p-10 card-base">
-                <CheckCircle size={48} className="text-primary mb-4" />
-                <h3 className="heading-h3 mb-2">
+              <div className="flex h-full flex-col items-center justify-center rounded-2xl border border-line bg-bg p-10 text-center">
+                <CheckCircle size={48} className="mb-5 text-primary" strokeWidth={1.5} />
+                <h3 className="font-display text-2xl font-semibold text-ink">
                   Vielen Dank für Ihre Nachricht!
                 </h3>
-                <p className="text-text-light mb-6">
+                <p className="mt-3 text-text-light">
                   Ich melde mich in der Regel innerhalb eines Werktags bei Ihnen.
                 </p>
                 <button
                   onClick={() => setStatus("idle")}
-                  className="text-sm text-primary hover:text-primary-light underline transition-colors"
+                  className="link-arrow mt-6 text-primary"
                 >
                   Weitere Nachricht senden
+                  <ArrowRight size={16} />
                 </button>
               </div>
             ) : (
               <form
                 onSubmit={handleSubmit}
-                className="relative space-y-5 p-7 md:p-8 card-base shadow-[var(--shadow-card)]"
+                className="relative space-y-5 rounded-2xl border border-line bg-bg p-7 md:p-9"
               >
                 <div>
-                  <label htmlFor="name" className="block text-sm font-medium text-text-strong mb-1.5">
+                  <label
+                    htmlFor="name"
+                    className="mb-1.5 block text-sm font-medium text-ink"
+                  >
                     Name *
                   </label>
                   <input
@@ -169,12 +170,15 @@ export default function Contact() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Ihr Name"
-                    className={inputClass}
+                    className={inputClasses}
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="email" className="block text-sm font-medium text-text-strong mb-1.5">
+                  <label
+                    htmlFor="email"
+                    className="mb-1.5 block text-sm font-medium text-ink"
+                  >
                     E-Mail *
                   </label>
                   <input
@@ -185,14 +189,17 @@ export default function Contact() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="ihre@email.de"
-                    className={inputClass}
+                    className={inputClasses}
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="phone" className="block text-sm font-medium text-text-strong mb-1.5">
+                  <label
+                    htmlFor="phone"
+                    className="mb-1.5 block text-sm font-medium text-ink"
+                  >
                     Telefon{" "}
-                    <span className="text-text-muted font-normal">(optional)</span>
+                    <span className="font-normal text-muted">(optional)</span>
                   </label>
                   <input
                     type="tel"
@@ -201,12 +208,15 @@ export default function Contact() {
                     value={formData.phone}
                     onChange={handleChange}
                     placeholder="+49 ..."
-                    className={inputClass}
+                    className={inputClasses}
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="message" className="block text-sm font-medium text-text-strong mb-1.5">
+                  <label
+                    htmlFor="message"
+                    className="mb-1.5 block text-sm font-medium text-ink"
+                  >
                     Wie kann ich Ihnen helfen? *
                   </label>
                   <textarea
@@ -217,13 +227,14 @@ export default function Contact() {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="Erzählen Sie mir kurz, was Sie beschäftigt – ich melde mich bei Ihnen."
-                    className={`${inputClass} resize-none`}
+                    className={`${inputClasses} resize-none`}
                   />
                 </div>
 
+                {/* Honeypot */}
                 <div
                   aria-hidden="true"
-                  className="absolute -left-[9999px] w-px h-px overflow-hidden"
+                  className="absolute -left-[9999px] h-px w-px overflow-hidden"
                 >
                   <label htmlFor="website">Website</label>
                   <input
@@ -244,17 +255,19 @@ export default function Contact() {
                     checked={consent}
                     onChange={(e) => setConsent(e.target.checked)}
                     required
-                    className="mt-1 size-4 rounded border-border text-primary focus:ring-primary/30"
+                    className="mt-1 size-4 rounded border-line text-primary focus:ring-primary/30"
                   />
-                  <label htmlFor="consent" className="text-xs text-text-light leading-relaxed">
+                  <label
+                    htmlFor="consent"
+                    className="text-xs leading-relaxed text-text-light"
+                  >
                     Ich habe die{" "}
                     <a href="/datenschutz" className="underline hover:text-primary">
                       Datenschutzerklärung
                     </a>{" "}
                     gelesen und stimme der Verarbeitung meiner Daten zur
-                    Bearbeitung dieser Anfrage zu. Die Einwilligung kann
-                    jederzeit per E-Mail an {siteConfig.email} widerrufen
-                    werden. *
+                    Bearbeitung dieser Anfrage zu. Die Einwilligung kann jederzeit
+                    per E-Mail an {siteConfig.email} widerrufen werden. *
                   </label>
                 </div>
 
@@ -265,20 +278,23 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={status === "sending" || !consent}
-                  className="btn-primary w-full disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:shadow-[var(--shadow-soft)]"
+                  className="group flex w-full items-center justify-center gap-2 rounded-full bg-primary px-6 py-3.5 font-medium text-white transition-colors hover:bg-primary-dark disabled:cursor-not-allowed disabled:opacity-60"
                 >
                   {status === "sending" ? (
-                    "Wird gesendet..."
+                    "Wird gesendet …"
                   ) : (
                     <>
                       Nachricht senden
-                      <Send size={18} />
+                      <Send
+                        size={17}
+                        className="transition-transform duration-300 group-hover:translate-x-0.5"
+                      />
                     </>
                   )}
                 </button>
               </form>
             )}
-          </Reveal>
+          </div>
         </div>
       </div>
     </section>
