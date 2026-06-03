@@ -4,8 +4,8 @@ import Reveal from "@/components/ui/Reveal";
 import AuroraLayer from "@/components/ui/AuroraLayer";
 
 const stats = [
-  { caption: "Erfahrung", value: `${siteConfig.yearsOfExperience} Jahre` },
-  { caption: "Ehemalige Mandate", value: siteConfig.formerClients.replace(/,\s*/g, " · ") },
+  { caption: "Erfahrung", value: `${siteConfig.yearsOfExperience} Jahre IT, Prozesse & KI` },
+  { caption: "Vertrauen von", value: siteConfig.formerClients.replace(/,\s*/g, " · ") },
   { caption: "Standort", value: `${siteConfig.city}, bundesweit` },
   { caption: "Erstgespräch", value: "in 24 Stunden" },
 ];
@@ -18,24 +18,25 @@ export default function Hero() {
       <div className="relative z-10 container-editorial pt-28 pb-16 md:pt-36 md:pb-24 lg:pt-44">
         <div className="max-w-4xl">
           <Reveal>
-            <p className="eyebrow mb-7">KI- &amp; IT-Beratung · Mittelstand</p>
+            <p className="eyebrow mb-7">KI- &amp; IT-Beratung · Mittelstand &amp; KMU</p>
           </Reveal>
 
           <Reveal delay={80}>
             <h1 className="display text-[2.6rem] leading-[1.05] sm:text-5xl md:text-6xl lg:text-[4.4rem] text-ink">
-              Software und KI, die Ihr Unternehmen{" "}
+              Bringen Sie Ihr Unternehmen mit KI und Software{" "}
               <span className="underline decoration-primary/55 decoration-2 underline-offset-[0.16em]">
                 wirklich
               </span>{" "}
-              voranbringen.
+              voran.
             </h1>
           </Reveal>
 
           <Reveal delay={160}>
             <p className="mt-8 max-w-2xl text-lg md:text-xl leading-relaxed text-text-light">
-              Pragmatische IT-Beratung, Digitalisierung und individuelle Software
-              für den deutschen Mittelstand. Ein Ansprechpartner aus Berlin – von
-              der Analyse bis zum laufenden System.
+              Für Mittelstand und KMU, die mit KI vorangehen wollen. Ich sage
+              Ihnen ehrlich, wo KI bei Ihnen Zeit und Geld bringt – und setze es
+              um. Von der Analyse bis zum laufenden System, ein Ansprechpartner
+              aus Berlin.
             </p>
           </Reveal>
 

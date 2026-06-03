@@ -12,8 +12,8 @@ const items = [
     text: "Viele Berater liefern eine Analyse und verschwinden. Viele Entwickler setzen um, ohne den Prozess zu verstehen. Ich mache beides – ein Ansprechpartner von der Analyse bis zum laufenden System.",
   },
   {
-    title: "Ehrlich statt oversold.",
-    text: "Wenn etwas keinen Sinn ergibt, sage ich es. Nicht jedes Problem braucht KI. Nicht jeder Prozess braucht eigene Software. Sie bezahlen mich dafür, die richtige Lösung zu finden – nicht die teuerste.",
+    title: "Ehrlich, wo es zählt.",
+    text: "Ich sage Ihnen, welche KI- und Software-Hebel bei Ihnen wirklich Geld und Zeit bringen – und in welcher Reihenfolge. Priorisierung statt Bauchgefühl. Sie bezahlen mich dafür, die richtige Lösung zu finden, nicht die teuerste.",
   },
   {
     title: "Gemeinsamer Erfolg statt Stundenzettel.",

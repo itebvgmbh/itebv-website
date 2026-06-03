@@ -43,10 +43,45 @@ export function getLocalBusinessJsonLd() {
       "IT-Beratung",
       "Digitalisierung",
       "Individuelle Software",
+      "Prozessautomatisierung",
       "Voice Agents",
       "Chatbots",
     ],
     priceRange: "$$",
+  };
+  if (sameAs.length > 0) data.sameAs = sameAs;
+  return data;
+}
+
+export function getPersonJsonLd() {
+  const sameAs = getSameAs();
+  const data: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${siteConfig.siteUrl}/#stefan`,
+    name: siteConfig.owner,
+    jobTitle: siteConfig.ownerTitle,
+    image: `${siteConfig.siteUrl}${siteConfig.stefanFoto}`,
+    worksFor: {
+      "@type": "ProfessionalService",
+      "@id": `${siteConfig.siteUrl}/#business`,
+      name: siteConfig.companyName,
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: siteConfig.city,
+      addressCountry: "DE",
+    },
+    knowsAbout: [
+      "KI-Beratung",
+      "IT-Beratung",
+      "Digitalisierung",
+      "Individuelle Softwareentwicklung",
+      "Prozessautomatisierung",
+      "Voice Agents",
+      "Chatbots",
+      "RAG-Systeme",
+    ],
   };
   if (sameAs.length > 0) data.sameAs = sameAs;
   return data;
@@ -76,7 +111,7 @@ export function getServiceJsonLd(args: {
     })),
     audience: {
       "@type": "BusinessAudience",
-      audienceType: "Mittelstand",
+      audienceType: "Mittelstand und KMU",
     },
   };
 }

@@ -1,6 +1,6 @@
-# [Project name]
+# ITEBV – Website
 
-_Replace the heading above with the project's name, and this line with one sentence describing what this app does for users._
+Marketing-Website der ITEBV GmbH (KI- und IT-Beratung für den Mittelstand, Berlin). React/Vite-App unter `artifacts/itebv-website/`. Aktueller Schwerpunkt: Überarbeitung von Texten, Aussagen und Content – inhaltlich, sprachlich und für klassische **und** KI-gestützte Suche (SEO + GEO).
 
 ## Run & Operate
 
@@ -22,23 +22,36 @@ _Replace the heading above with the project's name, and this line with one sente
 
 ## Where things live
 
-_Populate as you build — short repo map plus pointers to the source-of-truth file for DB schema, API contracts, theme files, etc._
+- **Website-Quellcode:** `artifacts/itebv-website/`
+- **Texte/Inhalte:** `src/components/sections/*.tsx` (Home-Abschnitte) und `src/pages/*.tsx` (Unterseiten)
+- **Stammdaten (Name, Adresse, CTA, Kennzahlen):** `src/lib/config.ts` (`siteConfig`) – Source of Truth, nicht hartkodieren
+- **Strukturierte Daten / JSON-LD:** `src/lib/structured-data.ts` (FAQ, Service, Breadcrumb)
+- **Meta-Tags pro Seite:** `src/hooks/useSeo.ts` + global in `artifacts/itebv-website/index.html`
+- **SEO-Dateien:** `artifacts/itebv-website/public/{sitemap.xml,robots.txt}`
 
-## Architecture decisions
+## Content- & SEO-Setup (für Textüberarbeitung)
 
-_Populate as you build — non-obvious choices a reader couldn't infer from the code (3-5 bullets)._
+- **Markenstimme:** `.cursor/memory/brand-voice.md` – Tonalität, Botschaften, Do's/Don'ts
+- **Keywords/Themen:** `.cursor/memory/seo-keywords.md` – Keyword-Map je Seite, GEO-Hebel
+- **Regeln:** `.cursor/rules/copywriting.mdc` und `.cursor/rules/seo-geo.mdc` (greifen bei Website-Dateien)
+- **Eigene Skills:** `.cursor/skills/itebv-website-copy/`, `.cursor/skills/itebv-seo-geo/`
+- **Methodik-Skills (extern, 20 Stück):** `.agents/skills/` (Paket `aaron-he-zhu/seo-geo-claude-skills`, Apache-2.0)
 
 ## Product
 
-_Describe the high-level user-facing capabilities of this app once they exist._
+Persönliche KI-/IT-Beratung, Digitalisierung und individuelle Software für den Mittelstand. USP: ein Ansprechpartner von der Analyse bis zum laufenden System, ehrlich statt oversold, Software gehört dem Kunden.
 
 ## User preferences
 
-_Populate as you build — explicit user instructions worth remembering across sessions._
+- Kommunikation auf Deutsch.
+- Vor größeren Änderungen erst Vorgehen abstimmen.
+- Markenstimme & Keywords sind Erstentwürfe – mit dem Inhaber validieren, bevor sie als gesetzt gelten.
 
 ## Gotchas
 
-_Populate as you build — sharp edges, "always run X before Y" rules._
+- Stammdaten kommen aus `siteConfig` – Änderungen dort, nicht in einzelnen Komponenten duplizieren.
+- FAQ-Texte (`FAQ.tsx`) speisen das FAQPage-JSON-LD – bei Textänderung bleibt das Schema automatisch konsistent.
+- Meta-Title/Description je Unterseite leben oben in der jeweiligen `pages/*.tsx` (Konstanten `pageTitle`/`pageDescription`).
 
 ## Pointers
 

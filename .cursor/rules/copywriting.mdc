@@ -1,0 +1,29 @@
+---
+description: ITEBV Tonalitäts- und Formulierungsregeln für Website-Texte
+globs: artifacts/itebv-website/**/*.{tsx,html,ts}
+alwaysApply: false
+---
+
+# ITEBV Copywriting
+
+Quelle der Wahrheit für Stimme & Botschaften: `.cursor/memory/brand-voice.md` (vor dem Texten lesen).
+
+## Beim Schreiben/Ändern von Website-Texten
+
+- **Sie**-Anrede für Kunden, **Ich**-Form für Stefan/ITEBV.
+- Pragmatisch, klar, ehrlich. Kurze Aktivsätze. Keine Buzzwords, keine leeren Superlative, keine Garantien.
+- Vom Kundenproblem her denken, dann die Lösung. Konkrete Zahlen/Zeiträume statt vager Versprechen.
+- „KI" (nicht „AI"), Eigenname immer „ITEBV".
+- USPs konsistent halten: ein Ansprechpartner Analyse→System · ehrlich statt oversold · Software gehört dem Kunden · DSGVO/EU-Hosting.
+
+## Beispiel
+
+```text
+❌ Wir bieten innovative, ganzheitliche End-to-End-KI-Lösungen für maximale Synergie.
+✅ Ein Voice Agent nimmt Anrufe entgegen, prüft Verfügbarkeiten und vereinbart Termine –
+   automatisch. Wenn KI bei Ihnen keinen Sinn ergibt, sage ich Ihnen das.
+```
+
+## Stammdaten
+
+Name, Adresse, Telefon, CTA-Label und Kennzahlen kommen aus `src/lib/config.ts` (`siteConfig`) – nicht hartkodieren.

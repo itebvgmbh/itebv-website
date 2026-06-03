@@ -127,10 +127,10 @@ export default function SoftwarePage() {
             <p className="eyebrow mb-3">Für wen das passt</p>
             <h2 className="heading-h2 mb-5">Wenn Standardlösungen nicht reichen</h2>
             <p className="text-text-light leading-relaxed">
-              Für Unternehmen mit speziellen Anforderungen, die kein Tool von
-              der Stange abdeckt – und die einen erfahrenen Ansprechpartner
-              suchen, der die Lösung nicht nur umsetzt, sondern auch versteht,
-              warum sie so umgesetzt werden muss.
+              Für Mittelstand und KMU mit speziellen Anforderungen, die kein
+              Tool von der Stange abdeckt – und die einen erfahrenen
+              Ansprechpartner suchen, der die Lösung nicht nur umsetzt, sondern
+              auch versteht, warum sie so umgesetzt werden muss.
             </p>
           </Reveal>
         </div>

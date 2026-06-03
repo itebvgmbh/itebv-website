@@ -1,0 +1,29 @@
+---
+description: ITEBV SEO- und GEO-Regeln (klassische + KI-Suche) für Website-Inhalte
+globs: artifacts/itebv-website/**/*.{tsx,html,ts}
+alwaysApply: false
+---
+
+# ITEBV SEO & GEO
+
+Keyword-Map & GEO-Hebel: `.cursor/memory/seo-keywords.md`. Tiefere Methodik: Skills unter `.agents/skills/` (z. B. `geo-content-optimizer`, `meta-tags-optimizer`, `schema-markup-generator`).
+
+## Klassische SEO
+
+- Genau **eine** `<h1>` pro Seite, danach saubere `h2`/`h3`-Hierarchie.
+- Meta-Title ~50–60 Zeichen, Description ~140–160 Zeichen, mit Primär-Keyword (siehe Keyword-Map). Pro Unterseite über `pageTitle`/`pageDescription` + `useSeo`.
+- Aussagekräftige `alt`-Texte, beschreibende Linktexte (kein „hier klicken").
+- Interne Verlinkung zwischen Start ↔ `/analyse` ↔ `/software` ↔ `/ki-loesungen` pflegen.
+
+## GEO (KI-Suche: ChatGPT, Perplexity, Gemini, AI Overviews)
+
+- **Answer-first:** Kernaussage im ersten Satz; pro Kernbegriff eine eigenständige 25–50-Wörter-Definition.
+- **Zitierfähige Fakten:** konkrete Zahlen, Zeiträume, Preise (z. B. Projektdauern, „ab 5.000 €").
+- **FAQ-/Q&A-Format** für häufige Fragen (siehe `FAQ.tsx`).
+- **E-E-A-T:** benannte Person (Stefan Tittmann), Referenzen, Standort/Impressum sichtbar halten.
+
+## Strukturierte Daten
+
+- JSON-LD über `src/lib/structured-data.ts` erzeugen; sichtbarer Text und Schema müssen übereinstimmen.
+- FAQ-Änderungen in `FAQ.tsx` → FAQPage-Schema bleibt automatisch synchron.
+- Neue Schema-Typen mit dem Skill `schema-markup-generator` erstellen und vor Deploy validieren.

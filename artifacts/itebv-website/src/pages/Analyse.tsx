@@ -7,7 +7,7 @@ import Reveal from "@/components/ui/Reveal";
 import { useSeo } from "@/hooks/useSeo";
 
 const pageDescription =
-  "ITEBV analysiert Ihre Geschäftsprozesse und erstellt eine realistische Digitalisierungsstrategie. Konkrete Roadmap statt PowerPoint für die Schublade. Beratung aus Berlin, deutschlandweit.";
+  "ITEBV analysiert Ihre Prozesse und liefert eine realistische Digitalisierungsstrategie für Mittelstand und KMU – konkrete Roadmap statt PowerPoint für die Schublade. Beratung aus Berlin.";
 const pageTitle =
   "Analyse & Digitalisierungsstrategie | ITEBV – IT-Beratung Berlin";
 const slug = "/analyse";
@@ -53,7 +53,7 @@ export default function AnalysePage() {
             <Reveal>
               <p className="eyebrow mb-4">Analyse &amp; Strategie</p>
               <h1 className="heading-h1 mb-6">
-                Sie wissen, dass sich etwas ändern muss. Aber nicht genau was.
+                Sie wollen vorankommen. Die Frage ist nur: wo zuerst?
               </h1>
               <div className="lead space-y-4">
                 <p>

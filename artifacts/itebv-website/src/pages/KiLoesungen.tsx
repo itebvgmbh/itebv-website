@@ -7,9 +7,9 @@ import Reveal from "@/components/ui/Reveal";
 import { useSeo } from "@/hooks/useSeo";
 
 const pageDescription =
-  "ITEBV setzt KI pragmatisch ein: Chatbots, Voice Agents, Prozessautomatisierung und RAG-Wissensdatenbanken. KI als Werkzeug, nicht als Spielerei. KI-Beratung aus Berlin, deutschlandweit.";
+  "ITEBV bringt KI in Mittelstand und KMU: Chatbots, Voice Agents, Prozessautomatisierung und RAG-Wissensdatenbanken – KI, die Zeit und Geld bringt. KI-Beratung aus Berlin, deutschlandweit.";
 const pageTitle =
-  "KI-Lösungen für den Mittelstand | ITEBV – KI-Beratung Berlin";
+  "KI-Lösungen für Mittelstand & KMU | ITEBV – KI-Beratung Berlin";
 const slug = "/ki-loesungen";
 
 const offerings = [
@@ -55,11 +55,10 @@ export default function KiLoesungenPage() {
                 KI ist kein Zukunftsprojekt. Sondern ein Werkzeug, das heute funktioniert.
               </h1>
               <p className="lead">
-                Sie müssen kein Technologiekonzern sein, um von KI zu
-                profitieren. Auch in einem mittelständischen Unternehmen gibt
-                es Aufgaben, die eine KI schneller, zuverlässiger und
-                günstiger erledigen kann als ein Mensch. Ohne dass jemand
-                seinen Job verliert.
+                Sie müssen kein Technologiekonzern sein, um mit KI
+                voranzukommen. Auch in Mittelstand und KMU gibt es Aufgaben,
+                die eine KI schneller, zuverlässiger und günstiger erledigt –
+                und Ihre Leute für das freispielt, was nur Menschen können.
               </p>
             </Reveal>
             <Reveal delay={120}>

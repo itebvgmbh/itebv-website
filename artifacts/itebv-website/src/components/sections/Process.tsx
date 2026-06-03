@@ -66,7 +66,7 @@ export default function Process() {
         <SectionHeading
           eyebrow="Ablauf"
           title="So läuft ein Projekt ab"
-          intro="Transparent von Tag eins: Dauer, Liefergegenstände und der Aufwand, den ich von Ihrer Seite brauche."
+          intro="Vom ersten Gespräch bis zum laufenden System – schnell zur Wirkung und transparent bei Dauer, Liefergegenständen und dem Aufwand, den ich von Ihrer Seite brauche."
         />
 
         <div className="mt-14 md:mt-20 border-t border-line">

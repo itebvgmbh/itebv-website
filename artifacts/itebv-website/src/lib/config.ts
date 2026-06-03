@@ -26,9 +26,9 @@ export const siteConfig = {
 
   siteUrl: "https://itebv.de",
   siteTitle:
-    "ITEBV – KI- und IT-Beratung für den Mittelstand | Berlin & deutschlandweit",
+    "ITEBV – KI- & IT-Beratung für Mittelstand & KMU | Berlin",
   siteDescription:
-    "Pragmatische KI- und IT-Beratung, Digitalisierung und individuelle Software für den Mittelstand. Persönliche Beratung aus Berlin, deutschlandweit. Ein Ansprechpartner von der Analyse bis zum laufenden System.",
+    "KI- und IT-Beratung, Digitalisierung und individuelle Software für Mittelstand und KMU – ein Ansprechpartner aus Berlin, von der Analyse bis zum laufenden System.",
 
   primaryCtaLabel: "Kostenloses 20-Min Gespräch",
   primaryCtaShort: "Termin buchen",

@@ -2,6 +2,7 @@ import { siteConfig } from "@/lib/config";
 import ProfileImage from "@/components/ui/ProfileImage";
 import { User, GraduationCap, Briefcase, MapPin, Linkedin } from "lucide-react";
 import Reveal from "@/components/ui/Reveal";
+import { getPersonJsonLd } from "@/lib/structured-data";
 
 export default function AboutMe() {
   const hasImage = siteConfig.stefanFoto && siteConfig.stefanFoto.trim() !== "";
@@ -23,6 +24,10 @@ export default function AboutMe() {
       id="ueber-mich"
       className="section-padding bg-paper border-t border-line"
     >
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getPersonJsonLd()) }}
+      />
       <div className="container-editorial">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16">
           {/* Portrait */}
@@ -57,16 +62,17 @@ export default function AboutMe() {
                 Mittelständler.
               </p>
               <p>
-                Heute helfe ich Unternehmen, ihre Abläufe mit moderner
-                Technologie effizienter zu machen. Das heißt manchmal eine
-                komplett neue Software, manchmal ein KI-Chatbot oder Voice
-                Agent – und manchmal die Erkenntnis, dass die einfachste Lösung
-                die beste ist.
+                Heute helfe ich Unternehmen, mit KI und moderner Software
+                schneller und wettbewerbsfähiger zu werden – vom KI-Chatbot
+                über Voice Agents bis zur individuellen Geschäftssoftware. Ich
+                arbeite selbst mit KI und einem festen Partnernetz; deshalb
+                liefere ich als Einzelperson auf Team-Niveau.
               </p>
               <p className="text-ink">
                 Was mich antreibt: Ich will, dass am Ende etwas steht, das
                 funktioniert. Kein Konzept, das niemand umsetzt. Sondern eine
-                Lösung, die Ihren Arbeitsalltag spürbar besser macht.
+                Lösung, die Ihren Arbeitsalltag spürbar besser macht – und die
+                Ihnen gehört.
               </p>
             </div>
 

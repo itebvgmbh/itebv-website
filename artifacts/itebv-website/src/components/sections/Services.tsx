@@ -39,7 +39,7 @@ export default function Services() {
               <span className="text-text-light">aus einer Hand.</span>
             </>
           }
-          intro="Sie haben Prozesse, die zu viel Zeit kosten. Systeme, die nicht miteinander reden. Ich helfe Ihnen, das zu ändern."
+          intro="Sie wollen vorankommen – mit besseren Prozessen, eigener Software und KI, die liefert. Ich zeige Ihnen, wo die größten Hebel liegen, und setze sie um. Für Mittelstand und KMU."
         />
 
         <div className="mt-14 md:mt-20 border-t border-line">
