@@ -59,9 +59,13 @@ html {
   overflow-x: hidden;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
+/* In @layer base, damit Tailwind-Größenklassen (h-7, h-full, …) auf Bildern
+   wieder gewinnen (sonst überschreibt diese Regel z. B. die Logo-Höhe). */
+@layer base {
+  img {
+    max-width: 100%;
+    height: auto;
+  }
 }
 
 ::selection {
