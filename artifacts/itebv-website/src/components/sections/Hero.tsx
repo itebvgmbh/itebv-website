@@ -5,7 +5,6 @@ import AuroraLayer from "@/components/ui/AuroraLayer";
 
 const stats = [
   { caption: "Erfahrung", value: `${siteConfig.yearsOfExperience} Jahre IT, Prozesse & KI` },
-  { caption: "Vertrauen von", value: siteConfig.formerClients.replace(/,\s*/g, " · ") },
   { caption: "Standort", value: `${siteConfig.city}, bundesweit` },
   { caption: "Erstgespräch", value: "in 24 Stunden" },
 ];
@@ -65,11 +64,11 @@ export default function Hero() {
 
         {/* Kennzahlen als schwebende Glas-Kachel */}
         <Reveal delay={320}>
-          <dl className="glass mt-16 md:mt-24 grid grid-cols-2 overflow-hidden rounded-2xl shadow-[0_20px_60px_-30px_rgba(11,16,22,0.25)] lg:grid-cols-4">
+          <dl className="glass mt-16 md:mt-24 grid grid-cols-1 overflow-hidden rounded-2xl shadow-[0_20px_60px_-30px_rgba(11,16,22,0.25)] sm:grid-cols-3">
             {stats.map((stat) => (
               <div
                 key={stat.caption}
-                className="border-white/45 p-6 lg:p-8 [&:nth-child(even)]:border-l [&:nth-child(n+3)]:border-t lg:[&:not(:first-child)]:border-l lg:[&:nth-child(n+3)]:border-t-0"
+                className="border-white/45 p-6 lg:p-8 [&:not(:first-child)]:border-t sm:[&:not(:first-child)]:border-t-0 sm:[&:not(:first-child)]:border-l"
               >
                 <dt className="text-[0.68rem] font-medium uppercase tracking-[0.18em] text-text-light">
                   {stat.caption}
