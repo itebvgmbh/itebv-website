@@ -59,6 +59,7 @@ const references: Reference[] = [
       { src: "/images/Linde_plc_logo.png", alt: "Linde" },
       { src: "/images/psi.png", alt: "PSI Software AG" },
       { src: "/images/kroenert.png", alt: "KROENERT" },
+      { src: "/images/truetzschler.png", alt: "Trützschler" },
     ],
   },
 ];

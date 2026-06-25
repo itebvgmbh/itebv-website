@@ -4,14 +4,17 @@ Gesammeltes Feedback des Inhabers zur Überarbeitung. Status: offen = noch nicht
 
 ## Offen
 
-### Trützschler-Logo fehlt (Asset benötigt)
-- **Wunsch:** Trützschler-Logo bei den Beratungs-/Kundenreferenzen ergänzen (Karte „10+ Jahre IT-Beratung" bzw. CustomerLogos-Band).
-- **Blocker:** keine Logodatei vorhanden (`public/images/` hat nur Linde, PSI, KROENERT, Rissel, Speinshart). → Inhaber muss `truetzschler.png/.svg` liefern, dann ergänze ich es analog zu den anderen.
+_(aktuell keine offenen Einzelpunkte)_
 
 ## Umgesetzt
 
 ### 3. Referenzen: Logo größer/lesbar ✓
-- Logo-Styling von `h-7 w-24 grayscale opacity-55` → **`h-11 w-32 md:h-12 md:w-40 opacity-90`** (Graustufe entfernt). Gilt für alle Referenz-Logos (Rissel, Speinshart).
+- Logo-Styling vergrößert → **`h-14 w-36 md:h-20 md:w-48 opacity-90`** (Graustufe entfernt).
+- Rissel-Karte (weiße Schrift) + Zahnarztpraxis-Karte auf **dunklen Hintergrund** (`bg-[#0c1422]`, Schachbrett-Muster) → weißes Lettering sichtbar.
+
+### 5. Kundenlogos & Trützschler ✓
+- „10+ Jahre IT-Beratung"-Karte zeigt Logo-Reihe Linde · PSI · KROENERT · **Trützschler**.
+- Trützschler-Logo (`public/images/truetzschler.png`) zusätzlich im CustomerLogos-Band (ersetzt das Platzhalter-Foto `014_main.jpg`).
 
 ### 1. Hero: „Ehemalige Mandate" umformuliert ✓
 - Stat-Caption „Ehemalige Mandate" → **„Vertrauen von"** (Hero.tsx). Kunden nicht mehr als „ehemalig" gerahmt.
