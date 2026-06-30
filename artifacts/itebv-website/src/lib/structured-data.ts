@@ -176,11 +176,24 @@ export function getBlogPostingJsonLd(args: {
     },
     publisher: {
       "@type": "Organization",
+      "@id": `${siteConfig.siteUrl}/#business`,
       name: siteConfig.companyName,
       logo: {
         "@type": "ImageObject",
         url: `${siteConfig.siteUrl}/images/itebv-logo.png`,
       },
     },
+  };
+}
+
+export function getWebSiteJsonLd() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": `${siteConfig.siteUrl}/#website`,
+    name: siteConfig.companyName,
+    url: `${siteConfig.siteUrl}/`,
+    inLanguage: "de-DE",
+    publisher: { "@id": `${siteConfig.siteUrl}/#business` },
   };
 }

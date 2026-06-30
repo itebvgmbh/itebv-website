@@ -4,7 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ChatWidget from "@/components/chat/ChatWidget";
 import MobileStickyCTA from "@/components/layout/MobileStickyCTA";
-import { getLocalBusinessJsonLd } from "@/lib/structured-data";
+import { getLocalBusinessJsonLd, getWebSiteJsonLd } from "@/lib/structured-data";
 import HomePage from "@/pages/Home";
 import AnalysePage from "@/pages/Analyse";
 import SoftwarePage from "@/pages/Software";
@@ -50,13 +50,17 @@ function Routes() {
   );
 }
 
-function App() {
+function App({ ssrPath }: { ssrPath?: string }) {
   return (
-    <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
+    <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")} ssrPath={ssrPath}>
       <ScrollToHashOnNav />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(getLocalBusinessJsonLd()) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(getWebSiteJsonLd()) }}
       />
       <a
         href="#hauptinhalt"

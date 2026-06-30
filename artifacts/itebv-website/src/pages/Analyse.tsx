@@ -5,12 +5,10 @@ import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structured-data";
 import ServiceCrossLinks from "@/components/ui/ServiceCrossLinks";
 import Reveal from "@/components/ui/Reveal";
 import { useSeo } from "@/hooks/useSeo";
+import { pageSeo } from "@/lib/seo";
 
-const pageDescription =
-  "ITEBV analysiert Ihre Prozesse und liefert eine realistische Digitalisierungsstrategie für Mittelstand und KMU – konkrete Roadmap statt PowerPoint für die Schublade. Beratung aus Berlin.";
-const pageTitle =
-  "Analyse & Digitalisierungsstrategie | ITEBV – IT-Beratung Berlin";
 const slug = "/analyse";
+const { title: pageTitle, description: pageDescription } = pageSeo["/analyse"];
 
 const whatIDo = [
   "Ich spreche mit den Menschen, die die Arbeit machen, nicht nur mit der Geschäftsführung",

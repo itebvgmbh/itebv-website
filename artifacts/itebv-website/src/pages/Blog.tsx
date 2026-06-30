@@ -7,10 +7,9 @@ import Reveal from "@/components/ui/Reveal";
 import AuroraLayer from "@/components/ui/AuroraLayer";
 import KompassCover from "@/components/blog/KompassCover";
 import { getAllPosts, formatDateDE } from "@/lib/blog";
+import { pageSeo } from "@/lib/seo";
 
-const pageTitle = "KI-Kompass für den Mittelstand – Blog | ITEBV";
-const pageDescription =
-  "Monatlich: die relevanten KI-Entwicklungen für Mittelstand und KMU – nüchtern eingeordnet, ohne Hype. Was sich für Ihr Unternehmen wirklich lohnt.";
+const { title: pageTitle, description: pageDescription } = pageSeo["/blog"];
 
 export default function BlogPage() {
   useSeo({ title: pageTitle, description: pageDescription, path: "/blog" });

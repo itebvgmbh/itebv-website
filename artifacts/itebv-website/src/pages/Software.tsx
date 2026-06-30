@@ -5,12 +5,10 @@ import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structured-data";
 import ServiceCrossLinks from "@/components/ui/ServiceCrossLinks";
 import Reveal from "@/components/ui/Reveal";
 import { useSeo } from "@/hooks/useSeo";
+import { pageSeo } from "@/lib/seo";
 
-const pageDescription =
-  "ITEBV entwickelt individuelle Geschäftssoftware, die zu Ihrem Unternehmen passt. Keine Lizenzkosten, keine Abhängigkeit – Software, die Ihnen gehört. KI-gestützte Entwicklung, persönlicher Ansprechpartner aus Berlin.";
-const pageTitle =
-  "Individuelle Geschäftssoftware | ITEBV – Softwareentwicklung Berlin";
 const slug = "/software";
+const { title: pageTitle, description: pageDescription } = pageSeo["/software"];
 
 const processSteps = [
   "Gemeinsame Anforderungsanalyse: Was muss die Software können?",

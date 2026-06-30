@@ -2,14 +2,10 @@ import { Link } from "wouter";
 import { ChevronRight } from "lucide-react";
 import { siteConfig } from "@/lib/config";
 import { useSeo } from "@/hooks/useSeo";
+import { pageSeo } from "@/lib/seo";
 
 export default function ImpressumPage() {
-  useSeo({
-    title: "Impressum | ITEBV GmbH",
-    description:
-      "Impressum der ITEBV GmbH – IT-Beratung in Berlin. Angaben gemäß § 5 TMG.",
-    path: "/impressum",
-  });
+  useSeo({ ...pageSeo["/impressum"], path: "/impressum" });
   return (
     <div>
       <section className="bg-bg-alt border-b border-border">

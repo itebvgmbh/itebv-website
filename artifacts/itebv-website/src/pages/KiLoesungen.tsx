@@ -5,12 +5,11 @@ import { getServiceJsonLd, getBreadcrumbJsonLd } from "@/lib/structured-data";
 import ServiceCrossLinks from "@/components/ui/ServiceCrossLinks";
 import Reveal from "@/components/ui/Reveal";
 import { useSeo } from "@/hooks/useSeo";
+import { pageSeo } from "@/lib/seo";
 
-const pageDescription =
-  "ITEBV bringt KI in Mittelstand und KMU: Chatbots, Voice Agents, Prozessautomatisierung und RAG-Wissensdatenbanken – KI, die Zeit und Geld bringt. KI-Beratung aus Berlin, deutschlandweit.";
-const pageTitle =
-  "KI-Lösungen für Mittelstand & KMU | ITEBV – KI-Beratung Berlin";
 const slug = "/ki-loesungen";
+const { title: pageTitle, description: pageDescription } =
+  pageSeo["/ki-loesungen"];
 
 const offerings = [
   { icon: MessageSquare, title: "Chatbots und digitale Assistenten", description: "Ein KI-gestützter Chatbot, der Kunden berät, Fragen beantwortet und Informationen bereitstellt. Basierend auf Ihren eigenen Daten und Dokumenten. Rund um die Uhr, ohne Wartezeit." },

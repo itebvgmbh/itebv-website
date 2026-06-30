@@ -1,14 +1,10 @@
 import { Link } from "wouter";
 import { ChevronRight } from "lucide-react";
 import { useSeo } from "@/hooks/useSeo";
+import { pageSeo } from "@/lib/seo";
 
 export default function DatenschutzPage() {
-  useSeo({
-    title: "Datenschutz & Disclaimer | ITEBV GmbH",
-    description:
-      "Datenschutzerklärung und Disclaimer der ITEBV GmbH. Informationen zur Verarbeitung personenbezogener Daten auf itebv.de.",
-    path: "/datenschutz",
-  });
+  useSeo({ ...pageSeo["/datenschutz"], path: "/datenschutz" });
   return (
     <div>
       <section className="bg-bg-alt border-b border-border">
