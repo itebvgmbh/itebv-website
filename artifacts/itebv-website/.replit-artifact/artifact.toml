@@ -22,6 +22,41 @@ build = [ "pnpm", "--filter", "@workspace/itebv-website", "run", "build" ]
 publicDir = "artifacts/itebv-website/dist/public"
 serve = "static"
 
+# Prerenderte Per-Route-HTML zuerst ausliefern (Replit löst extensionlose Pfade
+# NICHT automatisch zu /<route>/index.html auf). Reihenfolge = Priorität; existiert
+# die Zieldatei nicht, greift am Ende der SPA-Fallback.
+
+# Blog-Beiträge: ein Wildcard deckt alle aktuellen UND künftigen Posts ab.
+[[services.production.rewrites]]
+from = "/blog/*"
+to = "/blog/*/index.html"
+
+# Statische Top-Level-Seiten (clean URL -> Verzeichnis-Index).
+[[services.production.rewrites]]
+from = "/analyse"
+to = "/analyse/index.html"
+
+[[services.production.rewrites]]
+from = "/software"
+to = "/software/index.html"
+
+[[services.production.rewrites]]
+from = "/ki-loesungen"
+to = "/ki-loesungen/index.html"
+
+[[services.production.rewrites]]
+from = "/blog"
+to = "/blog/index.html"
+
+[[services.production.rewrites]]
+from = "/impressum"
+to = "/impressum/index.html"
+
+[[services.production.rewrites]]
+from = "/datenschutz"
+to = "/datenschutz/index.html"
+
+# SPA-Fallback für alle nicht prerenderten Pfade.
 [[services.production.rewrites]]
 from = "/*"
 to = "/index.html"
