@@ -143,3 +143,44 @@ export function getFaqJsonLd(items: { question: string; answer: string }[]) {
     })),
   };
 }
+
+export function getBlogPostingJsonLd(args: {
+  title: string;
+  description: string;
+  slug: string;
+  datePublished: string;
+  image?: string;
+}) {
+  const url = `${siteConfig.siteUrl}/blog/${args.slug}`;
+  const image = args.image
+    ? args.image.startsWith("http")
+      ? args.image
+      : `${siteConfig.siteUrl}${args.image}`
+    : `${siteConfig.siteUrl}${siteConfig.ogImage}`;
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: args.title,
+    description: args.description,
+    datePublished: args.datePublished,
+    dateModified: args.datePublished,
+    inLanguage: "de-DE",
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    image,
+    author: {
+      "@type": "Person",
+      name: siteConfig.owner,
+      url: siteConfig.siteUrl,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: siteConfig.companyName,
+      logo: {
+        "@type": "ImageObject",
+        url: `${siteConfig.siteUrl}/images/itebv-logo.png`,
+      },
+    },
+  };
+}

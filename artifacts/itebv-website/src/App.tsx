@@ -9,6 +9,8 @@ import HomePage from "@/pages/Home";
 import AnalysePage from "@/pages/Analyse";
 import SoftwarePage from "@/pages/Software";
 import KiLoesungenPage from "@/pages/KiLoesungen";
+import BlogPage from "@/pages/Blog";
+import BlogPostPage from "@/pages/BlogPost";
 import ImpressumPage from "@/pages/Impressum";
 import DatenschutzPage from "@/pages/Datenschutz";
 import NotFound from "@/pages/NotFound";
@@ -37,6 +39,10 @@ function Routes() {
       <Route path="/analyse" component={AnalysePage} />
       <Route path="/software" component={SoftwarePage} />
       <Route path="/ki-loesungen" component={KiLoesungenPage} />
+      <Route path="/blog" component={BlogPage} />
+      <Route path="/blog/:slug">
+        {(params) => <BlogPostPage slug={params.slug ?? ""} />}
+      </Route>
       <Route path="/impressum" component={ImpressumPage} />
       <Route path="/datenschutz" component={DatenschutzPage} />
       <Route component={NotFound} />

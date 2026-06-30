@@ -8,6 +8,7 @@ const navLinks = [
   { href: "/#referenzen", label: "Referenzen" },
   { href: "/#ueber-mich", label: "Über mich" },
   { href: "/#faq", label: "FAQ" },
+  { href: "/blog", label: "Blog" },
 ];
 
 export default function Header() {
@@ -39,15 +40,19 @@ export default function Header() {
         </Link>
 
         <nav className="hidden md:flex items-center gap-9">
-          {navLinks.map((link) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="link-underline text-[0.95rem] text-ink/70 hover:text-ink transition-colors"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const cls =
+              "link-underline text-[0.95rem] text-ink/70 hover:text-ink transition-colors";
+            return link.href.startsWith("/#") ? (
+              <a key={link.href} href={link.href} className={cls}>
+                {link.label}
+              </a>
+            ) : (
+              <Link key={link.href} href={link.href} className={cls}>
+                {link.label}
+              </Link>
+            );
+          })}
           <a
             href="/#kontakt"
             className="group inline-flex items-center gap-2 pl-5 pr-4 py-2.5 rounded-full bg-ink text-white text-sm font-medium hover:bg-primary transition-colors duration-300"
@@ -73,16 +78,29 @@ export default function Header() {
       {mobileOpen && (
         <nav className="md:hidden border-t border-line bg-paper">
           <div className="container-editorial py-5 flex flex-col">
-            {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={() => setMobileOpen(false)}
-                className="py-3 text-lg font-medium text-ink border-b border-line/70 last:border-0"
-              >
-                {link.label}
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const cls =
+                "py-3 text-lg font-medium text-ink border-b border-line/70 last:border-0";
+              return link.href.startsWith("/#") ? (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={cls}
+                >
+                  {link.label}
+                </a>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileOpen(false)}
+                  className={cls}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
             <a
               href="/#kontakt"
               onClick={() => setMobileOpen(false)}
