@@ -73,6 +73,14 @@ to = "/blog/ki-kompass-mai-2026/index.html"
 from = "/blog/ki-kompass-april-2026*"
 to = "/blog/ki-kompass-april-2026/index.html"
 
+[[services.production.rewrites]]
+from = "/blog/ki-kompass-juli-2026*"
+to = "/blog/ki-kompass-juli-2026/index.html"
+
+[[services.production.rewrites]]
+from = "/blog/ki-kompass-august-2026*"
+to = "/blog/ki-kompass-august-2026/index.html"
+
 [services.env]
 PORT = "25134"
 BASE_PATH = "/"
