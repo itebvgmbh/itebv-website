@@ -22,64 +22,69 @@ build = [ "pnpm", "--filter", "@workspace/itebv-website", "run", "build" ]
 publicDir = "artifacts/itebv-website/dist/public"
 serve = "static"
 
-# Prerenderte Per-Route-HTML ausliefern.
-# WICHTIG: Replit wertet Rewrites als "LETZTER Treffer gewinnt" aus (empirisch
-# bestaetigt). Daher steht der /*-Fallback ZUERST und die spezifischeren Regeln
-# DARUNTER (in steigender Spezifitaet), damit fuer jede URL die passende Regel
-# der letzte Treffer ist. Echte Dateien (Assets, /sitemap.xml, /<route>/index.html)
-# werden via Shadowing ohnehin direkt bedient. "*" nur am Ende, "to" ist konstant.
+# Rewrites fuer die prerenderten Per-Route-HTML-Dateien.
+# Gesicherte Semantik (Replit-Doku "Static Deployment Configuration" + empirisch v0-v3):
+#  - ERSTER Treffer gewinnt ("interpreted in the listed order"); kein Fallthrough.
+#  - "*" ist nur als eigenes letztes Segment gueltig ("/pfad/*"); "pfad*" matcht NIE,
+#    exakte Regeln ohne Stern werden hier ebenfalls ignoriert.
+#  - "/pfad/*" matcht auch das nackte "/pfad" (v1-bewiesen: /blog/* traf /blog).
+#  - "to" muss eine konstante, existierende Datei sein (nie "*" mitten im Ziel).
+#  - Echte Dateien (Assets, sitemap.xml, .../index.html) gewinnen immer via Shadowing.
+# Reihenfolge: Blog-Slugs VOR /blog/*, alles VOR dem SPA-Fallback /*.
+# NEUER BLOG-BEITRAG => neuen Block im Slug-Abschnitt ergaenzen.
 
-# Fallback fuer alle nicht prerenderten Pfade (zuerst -> wird unten ueberschrieben).
+# --- Blog-Einzelbeitraege ---
 [[services.production.rewrites]]
-from = "/*"
-to = "/index.html"
-
-# Statische Top-Level-Seiten.
-[[services.production.rewrites]]
-from = "/analyse*"
-to = "/analyse/index.html"
-
-[[services.production.rewrites]]
-from = "/software*"
-to = "/software/index.html"
+from = "/blog/ki-kompass-august-2026/*"
+to = "/blog/ki-kompass-august-2026/index.html"
 
 [[services.production.rewrites]]
-from = "/ki-loesungen*"
-to = "/ki-loesungen/index.html"
-
-[[services.production.rewrites]]
-from = "/impressum*"
-to = "/impressum/index.html"
-
-[[services.production.rewrites]]
-from = "/datenschutz*"
-to = "/datenschutz/index.html"
-
-# Blog-Uebersicht (vor den Einzelbeitraegen, damit /blog/<slug> spaeter gewinnt).
-[[services.production.rewrites]]
-from = "/blog*"
-to = "/blog/index.html"
-
-# Blog-Beitraege (MUESSEN nach /blog* stehen). Neuer Beitrag = neue Zeile.
-[[services.production.rewrites]]
-from = "/blog/ki-kompass-juni-2026*"
-to = "/blog/ki-kompass-juni-2026/index.html"
-
-[[services.production.rewrites]]
-from = "/blog/ki-kompass-mai-2026*"
-to = "/blog/ki-kompass-mai-2026/index.html"
-
-[[services.production.rewrites]]
-from = "/blog/ki-kompass-april-2026*"
-to = "/blog/ki-kompass-april-2026/index.html"
-
-[[services.production.rewrites]]
-from = "/blog/ki-kompass-juli-2026*"
+from = "/blog/ki-kompass-juli-2026/*"
 to = "/blog/ki-kompass-juli-2026/index.html"
 
 [[services.production.rewrites]]
-from = "/blog/ki-kompass-august-2026*"
-to = "/blog/ki-kompass-august-2026/index.html"
+from = "/blog/ki-kompass-juni-2026/*"
+to = "/blog/ki-kompass-juni-2026/index.html"
+
+[[services.production.rewrites]]
+from = "/blog/ki-kompass-mai-2026/*"
+to = "/blog/ki-kompass-mai-2026/index.html"
+
+[[services.production.rewrites]]
+from = "/blog/ki-kompass-april-2026/*"
+to = "/blog/ki-kompass-april-2026/index.html"
+
+# --- Blog-Uebersicht (NACH den Slugs; faengt auch unbekannte /blog/xyz weich ab) ---
+[[services.production.rewrites]]
+from = "/blog/*"
+to = "/blog/index.html"
+
+# --- Statische Top-Level-Seiten ---
+[[services.production.rewrites]]
+from = "/analyse/*"
+to = "/analyse/index.html"
+
+[[services.production.rewrites]]
+from = "/software/*"
+to = "/software/index.html"
+
+[[services.production.rewrites]]
+from = "/ki-loesungen/*"
+to = "/ki-loesungen/index.html"
+
+[[services.production.rewrites]]
+from = "/impressum/*"
+to = "/impressum/index.html"
+
+[[services.production.rewrites]]
+from = "/datenschutz/*"
+to = "/datenschutz/index.html"
+
+# --- SPA-Fallback: MUSS die LETZTE Regel sein ---
+# ("/" selbst braucht keine Regel: /index.html ist eine echte Datei -> Shadowing)
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
 
 [services.env]
 PORT = "25134"
