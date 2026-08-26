@@ -4,7 +4,7 @@ import { siteConfig } from "./config";
 // Wird sowohl von den Seiten (Client, useSeo) als auch vom Prerender-Skript
 // (scripts/prerender.mjs via entry-server) genutzt – so kann nichts auseinanderlaufen.
 
-export type PageSeo = { title: string; description: string };
+export type PageSeo = { title: string; description: string; image?: string };
 
 export const pageSeo = {
   "/": {
@@ -31,6 +31,7 @@ export const pageSeo = {
     title: "KI-Kompass für den Mittelstand – Blog | ITEBV",
     description:
       "Monatlich: die relevanten KI-Entwicklungen für Mittelstand und KMU – nüchtern eingeordnet, ohne Hype. Was sich für Ihr Unternehmen wirklich lohnt.",
+    image: "/images/blog/og-blog.png",
   },
   "/impressum": {
     title: "Impressum | ITEBV GmbH",

@@ -38,11 +38,19 @@ const escAttr = (s) =>
 const escText = (s) =>
   String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
+// Ersetzungen IMMER ueber eine Funktion: als String wuerde "$$", "$&" usw. im
+// Ersatztext von String.replace als Sondersequenz interpretiert (z. B. macht
+// priceRange "$$" aus der JSON-LD sonst ein "$").
 function setTitle(html, title) {
-  return html.replace(/<title>[\s\S]*?<\/title>/, `<title>${escText(title)}</title>`);
+  return html.replace(
+    /<title>[\s\S]*?<\/title>/,
+    () => `<title>${escText(title)}</title>`,
+  );
 }
 function replaceOrAppend(html, re, tag) {
-  return re.test(html) ? html.replace(re, tag) : html.replace(/<\/head>/, `  ${tag}\n</head>`);
+  return re.test(html)
+    ? html.replace(re, () => tag)
+    : html.replace(/<\/head>/, () => `  ${tag}\n</head>`);
 }
 // Reihenfolge-unabhängig (matcht das ganze Tag anhand des Schlüssel-Attributs),
 // damit ein künftiges Umsortieren der Attribute in index.html kein Duplikat erzeugt.
@@ -59,7 +67,7 @@ function setCanonical(html, href) {
   return replaceOrAppend(html, re, `<link rel="canonical" href="${escAttr(href)}" />`);
 }
 
-function injectHead(template, route, canonical) {
+function injectHead(template, route, canonical, siteUrl) {
   let html = template;
   html = setTitle(html, route.title);
   html = setMetaName(html, "description", route.description);
@@ -69,6 +77,28 @@ function injectHead(template, route, canonical) {
   html = setMetaProp(html, "og:url", canonical);
   html = setMetaName(html, "twitter:title", route.title);
   html = setMetaName(html, "twitter:description", route.description);
+
+  if (route.image) {
+    const abs = route.image.startsWith("http")
+      ? route.image
+      : `${siteUrl}${route.image}`;
+    html = setMetaProp(html, "og:image", abs);
+    html = setMetaProp(html, "og:image:alt", route.imageAlt || route.title);
+    html = setMetaName(html, "twitter:image", abs);
+  }
+
+  if (route.isArticle) {
+    html = setMetaProp(html, "og:type", "article");
+    if (route.lastmod) {
+      // Volles ISO-8601-Datum; 12:00 UTC vermeidet Datumssprünge je Zeitzone.
+      html = setMetaProp(
+        html,
+        "article:published_time",
+        `${route.lastmod}T12:00:00Z`,
+      );
+    }
+  }
+
   return html;
 }
 
@@ -164,10 +194,10 @@ async function main() {
   for (const route of manifest.routes) {
     const bodyHtml = mod.render(route.path);
     const canonical = route.path === "/" ? `${siteUrl}/` : `${siteUrl}${route.path}`;
-    let page = injectHead(template, route, canonical);
+    let page = injectHead(template, route, canonical, siteUrl);
     page = page.replace(
       /<div id="root">\s*<\/div>/,
-      `<div id="root">${bodyHtml}</div>`,
+      () => `<div id="root">${bodyHtml}</div>`,
     );
     const filePath =
       route.path === "/"

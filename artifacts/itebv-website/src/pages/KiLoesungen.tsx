@@ -8,8 +8,7 @@ import { useSeo } from "@/hooks/useSeo";
 import { pageSeo } from "@/lib/seo";
 
 const slug = "/ki-loesungen";
-const { title: pageTitle, description: pageDescription } =
-  pageSeo["/ki-loesungen"];
+const { description: pageDescription } = pageSeo["/ki-loesungen"];
 
 const offerings = [
   { icon: MessageSquare, title: "Chatbots und digitale Assistenten", description: "Ein KI-gestützter Chatbot, der Kunden berät, Fragen beantwortet und Informationen bereitstellt. Basierend auf Ihren eigenen Daten und Dokumenten. Rund um die Uhr, ohne Wartezeit." },
@@ -19,7 +18,7 @@ const offerings = [
 ];
 
 export default function KiLoesungenPage() {
-  useSeo({ title: pageTitle, description: pageDescription, path: slug });
+  useSeo({ ...pageSeo["/ki-loesungen"], path: slug });
   const serviceSchema = getServiceJsonLd({
     name: "KI-Lösungen für den Geschäftsalltag",
     description: pageDescription,

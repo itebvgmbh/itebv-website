@@ -7,6 +7,8 @@ type SeoOptions = {
   path: string;
   noindex?: boolean;
   image?: string;
+  imageAlt?: string;
+  type?: "website" | "article";
 };
 
 function setMeta(
@@ -34,7 +36,15 @@ function setLink(rel: string, href: string) {
   el.setAttribute("href", href);
 }
 
-export function useSeo({ title, description, path, noindex, image }: SeoOptions) {
+export function useSeo({
+  title,
+  description,
+  path,
+  noindex,
+  image,
+  imageAlt,
+  type,
+}: SeoOptions) {
   useEffect(() => {
     const url = `${siteConfig.siteUrl}${path}`;
     const ogImage = image
@@ -63,7 +73,16 @@ export function useSeo({ title, description, path, noindex, image }: SeoOptions)
       description,
     );
     setMeta('meta[property="og:url"]', "property", "og:url", url);
+    setMeta('meta[property="og:type"]', "property", "og:type", type ?? "website");
     setMeta('meta[property="og:image"]', "property", "og:image", ogImage);
+    if (image) {
+      setMeta(
+        'meta[property="og:image:alt"]',
+        "property",
+        "og:image:alt",
+        imageAlt ?? title,
+      );
+    }
 
     setMeta('meta[name="twitter:title"]', "name", "twitter:title", title);
     setMeta(
@@ -73,5 +92,5 @@ export function useSeo({ title, description, path, noindex, image }: SeoOptions)
       description,
     );
     setMeta('meta[name="twitter:image"]', "name", "twitter:image", ogImage);
-  }, [title, description, path, noindex, image]);
+  }, [title, description, path, noindex, image, imageAlt, type]);
 }

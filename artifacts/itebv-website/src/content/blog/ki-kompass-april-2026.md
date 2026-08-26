@@ -9,6 +9,7 @@ heroVariant: "kompass"
 heroTitle: "April 2026"
 heroSubtitle: "für den Mittelstand"
 heroImage: ""
+ogImage: "/images/blog/og-ki-kompass-april-2026.png"
 sourceMonth: "2026-04"
 ---
 

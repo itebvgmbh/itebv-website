@@ -8,7 +8,7 @@ import { useSeo } from "@/hooks/useSeo";
 import { pageSeo } from "@/lib/seo";
 
 const slug = "/software";
-const { title: pageTitle, description: pageDescription } = pageSeo["/software"];
+const { description: pageDescription } = pageSeo["/software"];
 
 const processSteps = [
   "Gemeinsame Anforderungsanalyse: Was muss die Software können?",
@@ -19,7 +19,7 @@ const processSteps = [
 ];
 
 export default function SoftwarePage() {
-  useSeo({ title: pageTitle, description: pageDescription, path: slug });
+  useSeo({ ...pageSeo["/software"], path: slug });
   const serviceSchema = getServiceJsonLd({
     name: "Individuelle Geschäftssoftware",
     description: pageDescription,

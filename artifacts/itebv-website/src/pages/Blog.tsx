@@ -9,10 +9,8 @@ import KompassCover from "@/components/blog/KompassCover";
 import { getAllPosts, formatDateDE } from "@/lib/blog";
 import { pageSeo } from "@/lib/seo";
 
-const { title: pageTitle, description: pageDescription } = pageSeo["/blog"];
-
 export default function BlogPage() {
-  useSeo({ title: pageTitle, description: pageDescription, path: "/blog" });
+  useSeo({ ...pageSeo["/blog"], path: "/blog" });
 
   const posts = getAllPosts();
   const breadcrumb = getBreadcrumbJsonLd([

@@ -8,7 +8,7 @@ import { useSeo } from "@/hooks/useSeo";
 import { pageSeo } from "@/lib/seo";
 
 const slug = "/analyse";
-const { title: pageTitle, description: pageDescription } = pageSeo["/analyse"];
+const { description: pageDescription } = pageSeo["/analyse"];
 
 const whatIDo = [
   "Ich spreche mit den Menschen, die die Arbeit machen, nicht nur mit der Geschäftsführung",
@@ -19,7 +19,7 @@ const whatIDo = [
 ];
 
 export default function AnalysePage() {
-  useSeo({ title: pageTitle, description: pageDescription, path: slug });
+  useSeo({ ...pageSeo["/analyse"], path: slug });
   const serviceSchema = getServiceJsonLd({
     name: "Prozessanalyse & Digitalisierungsstrategie",
     description: pageDescription,

@@ -30,6 +30,9 @@ export default function BlogPostPage({ slug }: { slug: string }) {
           title: `${post.title} | ITEBV`,
           description: post.excerpt,
           path: `/blog/${post.slug}`,
+          image: post.ogImage,
+          imageAlt: post.title,
+          type: "article" as const,
         }
       : {
           title: "Beitrag nicht gefunden | ITEBV",
@@ -73,6 +76,7 @@ export default function BlogPostPage({ slug }: { slug: string }) {
     description: post.excerpt,
     slug: post.slug,
     datePublished: post.date,
+    image: post.ogImage,
   });
 
   return (

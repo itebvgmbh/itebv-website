@@ -14,26 +14,30 @@ export type PrerenderRoute = {
   path: string;
   title: string;
   description: string;
+  image?: string;
+  imageAlt?: string;
   lastmod?: string;
+  isArticle?: boolean;
 };
 
 export function getPrerenderManifest(): {
   siteUrl: string;
   routes: PrerenderRoute[];
 } {
+  // Spread statt Feld-für-Feld: ein neues Feld in PageSeo, das PrerenderRoute
+  // nicht kennt, wird so zum Compile-Fehler statt still verloren zu gehen.
   const staticRoutes: PrerenderRoute[] = Object.entries(pageSeo).map(
-    ([path, meta]) => ({
-      path,
-      title: meta.title,
-      description: meta.description,
-    }),
+    ([path, meta]): PrerenderRoute => ({ path, ...meta }),
   );
 
   const blogRoutes: PrerenderRoute[] = getAllPosts().map((p) => ({
     path: `/blog/${p.slug}`,
     title: `${p.title} | ITEBV`,
     description: p.excerpt,
+    image: p.ogImage,
+    imageAlt: p.title,
     lastmod: p.date,
+    isArticle: true,
   }));
 
   return {

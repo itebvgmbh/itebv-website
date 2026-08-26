@@ -13,6 +13,7 @@ export type BlogPost = {
   heroTitle: string;
   heroSubtitle: string;
   heroImage: string;
+  ogImage: string;
   sourceMonth: string;
   body: string;
   readingTimeMin: number;
@@ -66,6 +67,7 @@ const posts: BlogPost[] = Object.entries(rawFiles)
       heroTitle: data.heroTitle || data.title || "",
       heroSubtitle: data.heroSubtitle ?? "",
       heroImage: data.heroImage ?? "",
+      ogImage: data.ogImage ?? "",
       sourceMonth: data.sourceMonth ?? "",
       body,
       readingTimeMin: readingTime(body),

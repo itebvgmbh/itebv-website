@@ -10,14 +10,10 @@ import FAQ from "@/components/sections/FAQ";
 import Contact from "@/components/sections/Contact";
 import WordmarkBand from "@/components/sections/WordmarkBand";
 import { useSeo } from "@/hooks/useSeo";
-import { siteConfig } from "@/lib/config";
+import { pageSeo } from "@/lib/seo";
 
 export default function HomePage() {
-  useSeo({
-    title: siteConfig.siteTitle,
-    description: siteConfig.siteDescription,
-    path: "/",
-  });
+  useSeo({ ...pageSeo["/"], path: "/" });
   return (
     <>
       <Hero />
