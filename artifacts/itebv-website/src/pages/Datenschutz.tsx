@@ -2,6 +2,13 @@ import { Link } from "wouter";
 import { ChevronRight } from "lucide-react";
 import { useSeo } from "@/hooks/useSeo";
 import { pageSeo } from "@/lib/seo";
+import { CookieSettingsButton } from "@/components/consent/CookieBanner";
+import {
+  GA_COOKIE,
+  GA_COOKIE_MONTHS,
+  GA_EVENT_RETENTION_MONTHS,
+  GA_SESSION_COOKIE,
+} from "@/lib/analytics";
 
 export default function DatenschutzPage() {
   useSeo({ ...pageSeo["/datenschutz"], path: "/datenschutz" });
@@ -117,6 +124,55 @@ export default function DatenschutzPage() {
                   Gesprächszusammenfassungen können per E-Mail an uns übermittelt
                   werden, um Ihre Anfrage weiterbearbeiten zu können. Die Nutzung
                   des Chatbots ist freiwillig.
+                </p>
+              </div>
+            </section>
+
+            <section id="analyse" className="scroll-mt-28">
+              <h2 className="text-2xl md:text-3xl font-bold text-text-strong mb-4">
+                Reichweitenmessung mit Google Analytics
+              </h2>
+              <div className="space-y-4 text-lg leading-relaxed">
+                <p>
+                  Nur wenn Sie im Cookie-Banner „Alle akzeptieren“ wählen, nutzt diese Website
+                  Google Analytics 4, einen Dienst der Google Ireland Limited, Gordon House,
+                  Barrow Street, Dublin 4, Irland. Ohne Ihre Einwilligung wird das Skript von
+                  Google gar nicht erst geladen, und es gehen keine Daten an Google.
+                  Rechtsgrundlage ist Ihre Einwilligung (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1
+                  TDDDG).
+                </p>
+                <p>
+                  Zweck ist zu verstehen, wie Besucher die Website finden und nutzen, um Inhalte
+                  und Bedienung zu verbessern. Erfasst werden aufgerufene Seiten, Herkunft
+                  (z. B. Suchmaschine oder verlinkende Website), Gerätetyp, Browser, ungefährer
+                  Standort auf Ebene von Land oder Region, Verweildauer sowie zwei Ereignisse ohne
+                  Angaben zur Person: das erfolgreiche Absenden des Kontaktformulars und ein Klick
+                  auf E-Mail-Adresse oder Telefonnummer. Der Inhalt Ihrer Nachricht, Name,
+                  E-Mail-Adresse oder Telefonnummer gehen nicht an Google. Google kürzt
+                  IP-Adressen in der EU, bevor sie gespeichert werden. Werbefunktionen und
+                  Google Signals sind abgeschaltet.
+                </p>
+                <p>
+                  Dabei setzt Google die Cookies „{GA_COOKIE}“ und „{GA_SESSION_COOKIE}“ mit einer
+                  Laufzeit von {GA_COOKIE_MONTHS} Monaten. Die Ereignisdaten werden nach{" "}
+                  {GA_EVENT_RETENTION_MONTHS} Monaten automatisch gelöscht. Eine Übermittlung in
+                  die USA ist möglich; Google LLC ist nach dem EU-US Data Privacy Framework
+                  zertifiziert. Weitere Informationen:{" "}
+                  <a
+                    href="https://policies.google.com/privacy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline"
+                  >
+                    https://policies.google.com/privacy
+                  </a>
+                  .
+                </p>
+                <p>
+                  Ihre Einwilligung können Sie jederzeit mit Wirkung für die Zukunft widerrufen
+                  oder neu erteilen:{" "}
+                  <CookieSettingsButton className="text-primary underline hover:text-primary-light" />
+                  . Beim Widerruf löschen wir die Analytics-Cookies in Ihrem Browser.
                 </p>
               </div>
             </section>

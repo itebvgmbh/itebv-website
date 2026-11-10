@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { siteConfig } from "@/lib/config";
 import { Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
+import { CookieSettingsButton } from "@/components/consent/CookieBanner";
 
 const serviceLinks = [
   { href: "/analyse", label: "Analyse & Strategie" },
@@ -107,6 +108,9 @@ export default function Footer() {
                 >
                   Datenschutz
                 </Link>
+              </li>
+              <li>
+                <CookieSettingsButton className="link-underline text-left transition-colors hover:text-white" />
               </li>
             </ul>
           </div>

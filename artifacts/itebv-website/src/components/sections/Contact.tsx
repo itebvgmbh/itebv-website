@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { siteConfig } from "@/lib/config";
+import { trackEvent } from "@/lib/gtag";
 import { Send, Mail, Phone, MapPin, CheckCircle, ArrowRight } from "lucide-react";
 
 export default function Contact() {
@@ -54,6 +55,7 @@ export default function Contact() {
       }
 
       setStatus("success");
+      trackEvent("generate_lead", { form_name: "kontakt" });
       setFormData({ name: "", email: "", phone: "", message: "", website: "" });
       setConsent(false);
     } catch (err) {

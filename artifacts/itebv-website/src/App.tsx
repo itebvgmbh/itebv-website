@@ -4,6 +4,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ChatWidget from "@/components/chat/ChatWidget";
 import MobileStickyCTA from "@/components/layout/MobileStickyCTA";
+import { CookieBanner } from "@/components/consent/CookieBanner";
 import { getLocalBusinessJsonLd, getWebSiteJsonLd } from "@/lib/structured-data";
 import HomePage from "@/pages/Home";
 import AnalysePage from "@/pages/Analyse";
@@ -75,6 +76,7 @@ function App({ ssrPath }: { ssrPath?: string }) {
       <Footer />
       <ChatWidget />
       <MobileStickyCTA />
+      <CookieBanner />
     </WouterRouter>
   );
 }
