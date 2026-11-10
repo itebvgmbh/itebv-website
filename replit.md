@@ -28,6 +28,7 @@ Marketing-Website der ITEBV GmbH (KI- und IT-Beratung für den Mittelstand, Berl
 - **Strukturierte Daten / JSON-LD:** `src/lib/structured-data.ts` (FAQ, Service, Breadcrumb)
 - **Meta-Tags pro Seite:** `src/hooks/useSeo.ts` + global in `artifacts/itebv-website/index.html`
 - **SEO-Dateien:** `artifacts/itebv-website/public/{sitemap.xml,robots.txt}`
+- **Prerendering & Routing (Deployment):** `scripts/prerender.mjs` schreibt jede Route nach `dist/public/seiten/<pfad>.html`, dazu `404.html` und `sitemap.xml`. Die Zuordnung Adresse → Datei steht in `artifacts/itebv-website/.replit-artifact/artifact.toml` (Rewrites). Es gibt bewusst **keinen** Catch-all `/*`: unbekannte Adressen liefern einen echten 404. Neue Seite oder neuer Blog-Beitrag ⇒ Rewrite-Regel ergänzen, sonst bricht der Build mit einer klaren Meldung ab. Keine Ordner mit Routennamen unter `public/` anlegen (der Server leitet sonst `/pfad` per 301 auf `/pfad/` um).
 
 ## Content- & SEO-Setup (für Textüberarbeitung)
 

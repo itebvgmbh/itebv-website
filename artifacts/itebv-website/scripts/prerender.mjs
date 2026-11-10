@@ -1,11 +1,21 @@
 // Build-Time-Prerendering: rendert jede Route mit react-dom/server zu statischem
 // HTML (echter <title>/Meta/Canonical/OG + gerenderter Body inkl. JSON-LD) und
-// schreibt eine Datei pro Route nach dist/public. Generiert außerdem sitemap.xml
-// mit <lastmod>. ZERO neue npm-Abhängigkeiten (nutzt das vorhandene vite + react-dom).
+// schreibt eine Datei pro Route nach dist/public/seiten/<pfad>.html. Generiert außerdem
+// sitemap.xml mit <lastmod> und 404.html. ZERO neue npm-Abhängigkeiten.
 //
-// FAIL-SAFE: Das Skript beendet sich IMMER mit Exit-Code 0. Schlägt irgendetwas
-// fehl, bleibt der bereits gebaute SPA in dist/public unangetastet (Client-Routing
-// + useSeo greifen wie bisher). Ein kaputtes Prerendering kann den Deploy nie brechen.
+// WARUM /seiten/*.html statt /<pfad>/index.html: Liegt unter dist/public ein Ordner
+// mit dem Namen der Route, leitet der Replit-Static-Server /analyse per 301 auf
+// /analyse/ um – Canonical und Sitemap nennen aber /analyse. Google meldete dann
+// "Seite mit Weiterleitung" bzw. "Umleitungsfehler". Ohne gleichnamigen Ordner greift
+// die Rewrite-Regel in .replit-artifact/artifact.toml direkt und liefert 200.
+//
+// 404: Es gibt KEINEN Catch-all-Rewrite mehr. Unbekannte Adressen bekommen 404.html
+// mit Status 404 (vorher: Startseite mit 200 = Soft 404 für alte WordPress-URLs).
+//
+// FEHLER => Exit-Code 1, der Build schlägt fehl und die laufende Version bleibt live.
+// (Ein Teil-Erfolg wäre schlimmer: die Rewrites zeigen auf /seiten/*.html, ohne diese
+// Dateien wären alle Unterseiten 404.) Ebenso, wenn eine Route keine passende
+// Rewrite-Regel in artifact.toml hat.
 
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { dirname, join } from "node:path";
@@ -22,6 +32,45 @@ const siteRoot = join(here, "..");
 const publicDir = join(siteRoot, "dist", "public");
 const serverDir = join(siteRoot, "dist", "server");
 const viteConfig = join(siteRoot, "vite.config.ts");
+const artifactToml = join(siteRoot, ".replit-artifact", "artifact.toml");
+
+// Ziel-Datei (relativ zu dist/public, mit führendem "/") einer Route.
+// "/" bleibt index.html (wird über Shadowing direkt ausgeliefert).
+function seitenDatei(path) {
+  return path === "/" ? "/index.html" : `/seiten${path}.html`;
+}
+
+// Prüft, dass jede Route genau die Rewrite-Regel hat, die auf ihre Datei zeigt,
+// und dass kein Catch-all "/*" mehr existiert (der würde den 404 wieder schlucken).
+function pruefeRewrites(routes) {
+  const toml = readFileSync(artifactToml, "utf8");
+  const regeln = [...toml.matchAll(/from\s*=\s*"([^"]+)"\s*\n\s*to\s*=\s*"([^"]+)"/g)].map(
+    (m) => ({ from: m[1], to: m[2] }),
+  );
+  const fehler = [];
+  if (regeln.some((r) => r.from === "/*")) {
+    fehler.push('Catch-all-Rewrite "/*" gefunden – er verhindert echte 404.');
+  }
+  for (const route of routes) {
+    if (route.path === "/") continue;
+    const ziel = seitenDatei(route.path);
+    const treffer = regeln.find((r) => r.from === `${route.path}/*`);
+    if (!treffer) fehler.push(`Rewrite fehlt: from = "${route.path}/*" to = "${ziel}"`);
+    else if (treffer.to !== ziel) fehler.push(`Rewrite ${route.path}/* zeigt auf ${treffer.to}, erwartet ${ziel}`);
+  }
+  if (fehler.length) {
+    throw new Error(`artifact.toml passt nicht zu den Routen:\n  - ${fehler.join("\n  - ")}`);
+  }
+}
+
+function seite404(template, bodyHtml) {
+  let html = setTitle(template, "Seite nicht gefunden | ITEBV GmbH");
+  html = setMetaName(html, "description", "Die angeforderte Seite konnte nicht gefunden werden.");
+  html = setMetaName(html, "robots", "noindex, follow");
+  html = html.replace(/\s*<link[^>]*\brel="canonical"[^>]*>/, "");
+  html = html.replace(/\s*<meta[^>]*\bproperty="og:url"[^>]*>/, "");
+  return html.replace(/<div id="root">\s*<\/div>/, () => `<div id="root">${bodyHtml}</div>`);
+}
 
 // vite.config.ts wirft ohne diese Env-Variablen; in der Replit-Build-Phase sind
 // sie gesetzt, hier setzen wir robuste Defaults (Prod-Basepfad "/").
@@ -187,6 +236,7 @@ async function main() {
   const manifest = mod.getPrerenderManifest();
   const siteUrl = String(manifest.siteUrl).replace(/\/$/, "");
   const template = readFileSync(templatePath, "utf8");
+  pruefeRewrites(manifest.routes);
 
   // 2) Alle Routen ZUERST komplett rendern (im Speicher) – erst danach schreiben.
   //    So hinterlässt ein Fehler mittendrin keinen halb-prerenderten Stand.
@@ -199,12 +249,19 @@ async function main() {
       /<div id="root">\s*<\/div>/,
       () => `<div id="root">${bodyHtml}</div>`,
     );
-    const filePath =
-      route.path === "/"
-        ? join(publicDir, "index.html")
-        : join(publicDir, route.path, "index.html");
+    const filePath = join(publicDir, seitenDatei(route.path));
+    // Ein gleichnamiger Ordner würde wieder den 301 auf "/pfad/" auslösen.
+    if (route.path !== "/" && existsSync(join(publicDir, route.path))) {
+      throw new Error(`dist/public${route.path} existiert als Datei/Ordner und überschattet die Route.`);
+    }
     outputs.push({ filePath, page });
   }
+
+  // 404-Seite: rendert die NotFound-Route des Routers (unbekannter Pfad).
+  outputs.push({
+    filePath: join(publicDir, "404.html"),
+    page: seite404(template, mod.render("/__seite-nicht-gefunden")),
+  });
 
   const sitemap = buildSitemap(manifest.routes, siteUrl);
 
@@ -216,13 +273,13 @@ async function main() {
   writeFileSync(join(publicDir, "sitemap.xml"), sitemap, "utf8");
 
   console.log(
-    `[prerender] OK – ${outputs.length} Routen + sitemap.xml geschrieben.`,
+    `[prerender] OK – ${outputs.length - 1} Routen + 404.html + sitemap.xml geschrieben.`,
   );
 }
 
 main().catch((err) => {
   console.error(
-    `[prerender] übersprungen (SPA-Fallback bleibt intakt): ${err?.stack || err?.message || err}`,
+    `[prerender] FEHLGESCHLAGEN – Build abgebrochen, die laufende Version bleibt live: ${err?.stack || err?.message || err}`,
   );
-  process.exit(0);
+  process.exit(1);
 });

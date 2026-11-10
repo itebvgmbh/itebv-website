@@ -22,69 +22,67 @@ build = [ "pnpm", "--filter", "@workspace/itebv-website", "run", "build" ]
 publicDir = "artifacts/itebv-website/dist/public"
 serve = "static"
 
-# Rewrites fuer die prerenderten Per-Route-HTML-Dateien.
-# Gesicherte Semantik (Replit-Doku "Static Deployment Configuration" + empirisch v0-v3):
-#  - ERSTER Treffer gewinnt ("interpreted in the listed order"); kein Fallthrough.
-#  - "*" ist nur als eigenes letztes Segment gueltig ("/pfad/*"); "pfad*" matcht NIE,
-#    exakte Regeln ohne Stern werden hier ebenfalls ignoriert.
-#  - "/pfad/*" matcht auch das nackte "/pfad" (v1-bewiesen: /blog/* traf /blog).
-#  - "to" muss eine konstante, existierende Datei sein (nie "*" mitten im Ziel).
-#  - Echte Dateien (Assets, sitemap.xml, .../index.html) gewinnen immer via Shadowing.
-# Reihenfolge: Blog-Slugs VOR /blog/*, alles VOR dem SPA-Fallback /*.
+# Rewrites fuer die prerenderten Seiten (scripts/prerender.mjs schreibt sie nach
+# dist/public/seiten/<pfad>.html und bricht den Build ab, wenn hier eine Regel fehlt).
+# Gesicherte Semantik (Replit-Doku "Static Deployment Configuration" + empirisch):
+#  - ERSTER Treffer gewinnt; kein Fallthrough.
+#  - "*" nur als eigenes letztes Segment ("/pfad/*"); "/pfad/*" matcht auch das nackte "/pfad".
+#  - "to" muss eine konstante, existierende Datei sein.
+#  - Echte Dateien (Assets, sitemap.xml) gewinnen immer via Shadowing.
+#  - Gibt es unter dist/public einen ORDNER namens /pfad, leitet der Server /pfad per
+#    301 auf /pfad/ um, bevor eine Regel greift. Darum liegen die Seiten unter /seiten/.
+# KEIN Catch-all "/*": unbekannte Adressen bekommen dist/public/404.html mit Status 404.
+# Reihenfolge: Blog-Slugs VOR /blog/*.
 # NEUER BLOG-BEITRAG => neuen Block im Slug-Abschnitt ergaenzen.
 
 # --- Blog-Einzelbeitraege ---
 [[services.production.rewrites]]
 from = "/blog/ki-kompass-august-2026/*"
-to = "/blog/ki-kompass-august-2026/index.html"
+to = "/seiten/blog/ki-kompass-august-2026.html"
 
 [[services.production.rewrites]]
 from = "/blog/ki-kompass-juli-2026/*"
-to = "/blog/ki-kompass-juli-2026/index.html"
+to = "/seiten/blog/ki-kompass-juli-2026.html"
 
 [[services.production.rewrites]]
 from = "/blog/ki-kompass-juni-2026/*"
-to = "/blog/ki-kompass-juni-2026/index.html"
+to = "/seiten/blog/ki-kompass-juni-2026.html"
 
 [[services.production.rewrites]]
 from = "/blog/ki-kompass-mai-2026/*"
-to = "/blog/ki-kompass-mai-2026/index.html"
+to = "/seiten/blog/ki-kompass-mai-2026.html"
 
 [[services.production.rewrites]]
 from = "/blog/ki-kompass-april-2026/*"
-to = "/blog/ki-kompass-april-2026/index.html"
+to = "/seiten/blog/ki-kompass-april-2026.html"
 
-# --- Blog-Uebersicht (NACH den Slugs; faengt auch unbekannte /blog/xyz weich ab) ---
+# --- Blog-Uebersicht (NACH den Slugs; faengt auch unbekannte /blog/xyz ab) ---
 [[services.production.rewrites]]
 from = "/blog/*"
-to = "/blog/index.html"
+to = "/seiten/blog.html"
 
 # --- Statische Top-Level-Seiten ---
 [[services.production.rewrites]]
 from = "/analyse/*"
-to = "/analyse/index.html"
+to = "/seiten/analyse.html"
 
 [[services.production.rewrites]]
 from = "/software/*"
-to = "/software/index.html"
+to = "/seiten/software.html"
 
 [[services.production.rewrites]]
 from = "/ki-loesungen/*"
-to = "/ki-loesungen/index.html"
+to = "/seiten/ki-loesungen.html"
 
 [[services.production.rewrites]]
 from = "/impressum/*"
-to = "/impressum/index.html"
+to = "/seiten/impressum.html"
 
 [[services.production.rewrites]]
 from = "/datenschutz/*"
-to = "/datenschutz/index.html"
+to = "/seiten/datenschutz.html"
 
-# --- SPA-Fallback: MUSS die LETZTE Regel sein ---
-# ("/" selbst braucht keine Regel: /index.html ist eine echte Datei -> Shadowing)
-[[services.production.rewrites]]
-from = "/*"
-to = "/index.html"
+# "/" braucht keine Regel: /index.html ist eine echte Datei -> Shadowing.
 
 [services.env]
 PORT = "25134"
